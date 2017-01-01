@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE Snippets[
+  <!ELEMENT Snippets (Item)*>
+  <!ELEMENT Item (#PCDATA)>
+    <!ATTLIST Item name CDATA #REQUIRED>
+]>
+<Snippets>
+  <Item name ="For">
+    For i As Integer = 0 To 100
+    Next i
+  </Item>
+  <Item name ="ForEach">
+    For Each item In array
+    Next
+  </Item>
+  <Item name ="If">
+    If cond Then
+    End If
+  </Item>
+  <Item name ="IfElse">
+    If cond Then
+    Else
+    End If
+  </Item>
+  <Item name ="Select">
+    Select Case thing
+    Case 1
+    Case 2
+    End Select
+  </Item>
+  <Item name ="Sub">
+    Private Sub yourSub()
+    End Sub
+  </Item>
+  <Item name ="Function">
+    Private Function yourFunc() As Integer
+    Return 0
+    End Sub
+  </Item>
+</Snippets>
