@@ -12,12 +12,12 @@ Public Class CodeEdit
         End Get
         Set(ByVal value As Manager)
             _manager = value
-            Me.RichTextBox1.Text = value.userCode
+            Me.RichTextBox1.Text = value.UserCode
         End Set
     End Property
 
 	Private Sub CodeEdit_FormClosing(sender As Object, e As EventArgs) Handles Me.FormClosing
-        _manager.userCode = Me.RichTextBox1.Text
+        _manager.UserCode = Me.RichTextBox1.Text
         opened = False
     End Sub
 
@@ -26,7 +26,7 @@ Public Class CodeEdit
         Me.DoubleBuffered = True
 
 		highlighter = New HighlightingSup(RichTextBox1, Keywords.KeyTable)
-		finisher = New AutoFinishSup(RichTextBox1, ImageList1, _manager.referencesAssm)
+		finisher = New AutoFinishSup(RichTextBox1, ImageList1, _manager.References)
 		taber = New AutoTabsSup(RichTextBox1)
 
 		If Settings.EnableCodeSnippets Then

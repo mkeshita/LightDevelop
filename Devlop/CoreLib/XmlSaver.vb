@@ -12,13 +12,13 @@
 		x.WriteRaw("<?xml version=""1.0"" ?>")
 		x.WriteStartElement("formData")
 			x.WriteStartElement("formAttr")
-			x.WriteAttributeString("name", _m._f.Text)
-				WriteAttrDeclXml(x, _m._f)
+			x.WriteAttributeString("name", _m.DesignerForm.Text)
+				WriteAttrDeclXml(x, _m.DesignerForm)
 			x.WriteEndElement()
 
-			For Each c In _m._conts
+			For Each c In _m.DictControlSizer
 				x.WriteStartElement("controlAttr")
-				x.WriteAttributeString("name", _m._cTNam(c.Key))
+				x.WriteAttributeString("name", _m.DictControlName(c.Key))
 				x.WriteAttributeString("controlKind", c.Key.GetType().Name)
 					WriteAttrDeclXml(x, c.Key)
 				x.WriteEndElement()

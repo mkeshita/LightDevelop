@@ -6,24 +6,24 @@
 	End Sub
 
 	Sub LoadXml(file As String)
-		If _m._conts.Count > 0 Then
+		If _m.DictControlSizer.Count > 0 Then
 			If MessageBox.Show("All applied changes will lost. ", "Do you really want to load? ",
 							MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.No Then Exit Sub
 		End If
-		Dim co As New Dictionary(Of Control, Control)(_m._conts)
+		Dim co As New Dictionary(Of Control, Control)(_m.DictControlSizer)
 		
 		Try
 			Dim x = Xml.XmlReader.Create(file)
 			x.ReadToFollowing("formAttr")
-			_m._f.Text = x.GetAttribute("name")
-			ReadControlDecl(x, _m._f)
+			_m.DesignerForm.Text = x.GetAttribute("name")
+			ReadControlDecl(x, _m.DesignerForm)
 			Do While x.ReadToNextSibling("controlAttr")
 				Dim name = x.GetAttribute("name"),
 					type = x.GetAttribute("controlKind")
 			
-				Dim c = AddControlHelper.CreatControlToContainer(type, _m._f)
+				Dim c = AddControlHelper.CreatControlToContainer(type, _m.DesignerForm)
 				_m.AddControl(c)
-				_m._cTNam(c) = name
+				_m.DictControlName(c) = name
 
 				ReadControlDecl(x, c)
 			Loop

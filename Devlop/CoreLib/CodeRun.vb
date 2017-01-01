@@ -15,7 +15,7 @@
         Dim v As New VBCodeProvider()
         Dim p As New CodeDom.Compiler.CompilerParameters()
         p.TreatWarningsAsErrors = False
-        For Each s In _m.referencesAssm
+        For Each s In _m.References
             p.ReferencedAssemblies.Add(s)
         Next
         _assm = v.CompileAssemblyFromSource(p, _source)
@@ -28,7 +28,7 @@
         p.MainClass = _entC
         p.OutputAssembly = output
         p.TreatWarningsAsErrors = False
-        For Each s In _m.referencesAssm
+        For Each s In _m.References
             p.ReferencedAssemblies.Add(s)
         Next
         _assm = v.CompileAssemblyFromSource(p, _source)

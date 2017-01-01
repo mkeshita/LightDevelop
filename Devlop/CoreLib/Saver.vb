@@ -1,4 +1,4 @@
-﻿Public Class Saver
+﻿Public Class CodeGenerater
     
     Dim outline As String = String.Format(
         "[IMPORTS]{0}"                                                                  & _
@@ -33,14 +33,14 @@
         _m = m
     End Sub
 
-    Function CompileForm() As String
+    Function Compile() As String
         Dim comp As String
-        comp = outline.Replace("[NAME]", _m._f.Text)
+        comp = outline.Replace("[NAME]", _m.DesignerForm.Text)
 
         Dim str = ""
-        For Each s In _m.referencesAssm
+        For Each s In _m.ImportStatments
             ' Remove the ".dll"
-            str &= "Imports " & Mid(s, 1, s.Length - 4) & vbCrLf
+            str &= "Imports " & s & vbCrLf
         Next
         comp = comp.Replace("[IMPORTS]", str)
         str = ""
@@ -49,10 +49,10 @@
 
         str &= String.Format("{0}        Me.SuspendLayout(){0}", vbCrLf)
 
-        str &= String.Format("{0}        ' {1}{0}{0}", vbCrLf, _m._f.Text)
-        str &= GetAttuDelcare(_m._f, True)
-        For Each ctrls In _m._conts
-            str &= String.Format("{0}        ' {1}{0}{0}", vbCrLf, _m._cTNam(ctrls.Key))
+        str &= String.Format("{0}        ' {1}{0}{0}", vbCrLf, _m.DesignerForm.Text)
+        str &= GetAttuDelcare(_m.DesignerForm, True)
+        For Each ctrls In _m.DictControlSizer
+            str &= String.Format("{0}        ' {1}{0}{0}", vbCrLf, _m.DictControlName(ctrls.Key))
             str &= GetAttuDelcare(ctrls.Key)
         Next
         comp = comp.Replace("[CODE]", str)
@@ -61,16 +61,16 @@
         WriteDelcares(str)
 
         comp = comp.Replace("[DECLARES]", str)
-        comp = comp.Replace("[USERCODE]", _m.userCode)
+        comp = comp.Replace("[USERCODE]", _m.UserCode)
         Return comp
     End Function
 
     Sub WriteNames(ByRef s As String)
         s &= String.Format("{0}        ' Create Instances{0}{0}", vbCrLf)
-        For Each ctrls In _m._conts
+        For Each ctrls In _m.DictControlSizer
             s &= "        "
             Dim str = "Me.{0} = New {1}(){2}"
-            Dim name = _m._cTNam(ctrls.Key)
+            Dim name = _m.DictControlName(ctrls.Key)
             Dim cls = ctrls.Key.GetType.FullName
             str = String.Format(str, name, cls, vbCrLf)
             s &= str
@@ -80,10 +80,10 @@
     
 
     Sub WriteDelcares(ByRef s As String)
-        For Each ctrls In _m._conts
+        For Each ctrls In _m.DictControlSizer
             s &= "    "
             Dim str = "WithEvents Friend {0} As {1}{2}"
-            Dim name = _m._cTNam(ctrls.Key)
+            Dim name = _m.DictControlName(ctrls.Key)
             Dim cls = ctrls.Key.GetType.FullName
             str = String.Format(str, name, cls, vbCrLf)
             s &= str
@@ -98,11 +98,11 @@
         For Each p In prop
             Dim val = p.GetValue(c, Nothing)
 
-            If Not ((val Is Nothing And GetDefaultPropertyValueOfControlHelper(p) Is Nothing) OrElse
-                    (val.Equals(GetDefaultPropertyValueOfControlHelper(p))) OrElse
+            If Not ((val Is Nothing And GetDefault(p) Is Nothing) OrElse
+                    (val.Equals(GetDefault(p))) OrElse
                     (Not p.CanWrite)) Then
                 Dim thisType = p.PropertyType
-                Dim dec = String.Format("        Me.{0}.{1} = ", _m._cTNam(c), p.Name)
+                Dim dec = String.Format("        Me.{0}.{1} = ", _m.DictControlName(c), p.Name)
                 If f Then dec = String.Format("        Me.{0} = ", p.Name)
                 Select Case thisType.Name
                     Case "String"
@@ -144,14 +144,14 @@
         Next
 
         If Not f Then
-            s &= String.Format("        Me.Controls.Add({0}){1}", _m._cTNam(c), vbCrLf)
+            s &= String.Format("        Me.Controls.Add({0}){1}", _m.DictControlName(c), vbCrLf)
         End If
 
         Return s
     End Function
 
 
-    Private Function GetDefaultPropertyValueOfControlHelper(prop As Reflection.PropertyInfo)
+    Private Function GetDefault(prop As Reflection.PropertyInfo)
         try
             Dim c As New Control()
             Return prop.GetValue(c, nothing)

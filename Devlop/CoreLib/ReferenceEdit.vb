@@ -18,7 +18,7 @@
         ' 在 InitializeComponent() 调用之后添加任何初始化。
         
         ListView1.Clear
-        For Each ref In man.referencesAssm
+        For Each ref In man.References
             ListView1.Items.Add(ref)
         Next
 
@@ -27,9 +27,9 @@
     End Sub
 
     Private Sub ReferencesEdit_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        _m.referencesAssm.Clear
+        _m.References.Clear
         For Each item As ListViewItem In ListView1.Items
-            _m.referencesAssm.Add(item.Text)
+            _m.References.Add(item.Text)
         Next
     End Sub
 End Class

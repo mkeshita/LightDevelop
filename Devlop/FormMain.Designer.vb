@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class FormMain
     Inherits System.Windows.Forms.Form
 
     'Form 重写 Dispose，以清理组件列表。
@@ -23,7 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
-		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
 		Me.Panel1 = New System.Windows.Forms.Panel()
 		Me.TextBox1 = New System.Windows.Forms.TextBox()
 		Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
@@ -59,6 +59,7 @@ Partial Class Form1
 		Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
 		Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+		Me.BuildExecutableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.Panel1.SuspendLayout
 		Me.Panel2.SuspendLayout
 		Me.MenuStrip1.SuspendLayout
@@ -164,7 +165,7 @@ Partial Class Form1
 		'
 		'ProgramToolStripMenuItem
 		'
-		Me.ProgramToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateExecutableToolStripMenuItem, Me.ReferencesToolStripMenuItem})
+		Me.ProgramToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateExecutableToolStripMenuItem, Me.BuildExecutableToolStripMenuItem, Me.ReferencesToolStripMenuItem})
 		Me.ProgramToolStripMenuItem.Name = "ProgramToolStripMenuItem"
 		resources.ApplyResources(Me.ProgramToolStripMenuItem, "ProgramToolStripMenuItem")
 		Me.ProgramToolStripMenuItem.Tag = ""
@@ -277,7 +278,12 @@ Partial Class Form1
 		'
 		Me.OpenFileDialog1.FileName = "OpenFileDialog1"
 		'
-		'Form1
+		'BuildExecutableToolStripMenuItem
+		'
+		Me.BuildExecutableToolStripMenuItem.Name = "BuildExecutableToolStripMenuItem"
+		resources.ApplyResources(Me.BuildExecutableToolStripMenuItem, "BuildExecutableToolStripMenuItem")
+		'
+		'FormMain
 		'
 		resources.ApplyResources(Me, "$this")
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -290,7 +296,7 @@ Partial Class Form1
 		Me.Controls.Add(Me.MenuStrip1)
 		Me.IsMdiContainer = true
 		Me.MainMenuStrip = Me.MenuStrip1
-		Me.Name = "Form1"
+		Me.Name = "FormMain"
 		Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
 		Me.TransparencyKey = System.Drawing.Color.Transparent
 		Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -342,4 +348,5 @@ End Sub
 	Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents OpenFileDialog1 As OpenFileDialog
+	Friend WithEvents BuildExecutableToolStripMenuItem As ToolStripMenuItem
 End Class

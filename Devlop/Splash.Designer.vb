@@ -23,61 +23,62 @@ Partial Class Splash
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Splash))
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-		Me.Panel6 = New System.Windows.Forms.Panel()
+		Me.bPanel4 = New System.Windows.Forms.Panel()
 		Me.Label2 = New System.Windows.Forms.Label()
 		Me.Panel4 = New System.Windows.Forms.Panel()
-		Me.Panel5 = New System.Windows.Forms.Panel()
+		Me.bPanel3 = New System.Windows.Forms.Panel()
 		Me.Label3 = New System.Windows.Forms.Label()
 		Me.Panel2 = New System.Windows.Forms.Panel()
-		Me.Panel3 = New System.Windows.Forms.Panel()
+		Me.bPanel1 = New System.Windows.Forms.Panel()
 		Me.Button2 = New System.Windows.Forms.Button()
 		Me.Button1 = New System.Windows.Forms.Button()
-		Me.Panel1 = New System.Windows.Forms.Panel()
+		Me.bPanel2 = New System.Windows.Forms.Panel()
 		Me.Label1 = New System.Windows.Forms.Label()
 		Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
 		Me.TableLayoutPanel1.SuspendLayout
-		Me.Panel6.SuspendLayout
+		Me.bPanel4.SuspendLayout
 		Me.Panel4.SuspendLayout
-		Me.Panel5.SuspendLayout
+		Me.bPanel3.SuspendLayout
 		Me.Panel2.SuspendLayout
-		Me.Panel3.SuspendLayout
-		Me.Panel1.SuspendLayout
+		Me.bPanel1.SuspendLayout
+		Me.bPanel2.SuspendLayout
 		Me.SuspendLayout
 		'
 		'TableLayoutPanel1
 		'
-		Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Lavender
+		Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
 		Me.TableLayoutPanel1.ColumnCount = 2
 		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.29032!))
 		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.70968!))
-		Me.TableLayoutPanel1.Controls.Add(Me.Panel6, 1, 1)
+		Me.TableLayoutPanel1.Controls.Add(Me.bPanel4, 1, 1)
 		Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 0, 1)
 		Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 0)
-		Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 1, 0)
+		Me.TableLayoutPanel1.Controls.Add(Me.bPanel2, 1, 0)
 		Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.TableLayoutPanel1.ForeColor = System.Drawing.Color.White
 		Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
 		Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 		Me.TableLayoutPanel1.RowCount = 2
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.42574!))
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.57426!))
-		Me.TableLayoutPanel1.Size = New System.Drawing.Size(563, 371)
+		Me.TableLayoutPanel1.Size = New System.Drawing.Size(573, 424)
 		Me.TableLayoutPanel1.TabIndex = 0
 		'
-		'Panel6
+		'bPanel4
 		'
-		Me.Panel6.BackColor = System.Drawing.Color.CornflowerBlue
-		Me.Panel6.Controls.Add(Me.Label2)
-		Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.Panel6.Location = New System.Drawing.Point(348, 216)
-		Me.Panel6.Name = "Panel6"
-		Me.Panel6.Size = New System.Drawing.Size(212, 152)
-		Me.Panel6.TabIndex = 3
+		Me.bPanel4.BackColor = System.Drawing.Color.Transparent
+		Me.bPanel4.Controls.Add(Me.Label2)
+		Me.bPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.bPanel4.Location = New System.Drawing.Point(354, 246)
+		Me.bPanel4.Name = "bPanel4"
+		Me.bPanel4.Size = New System.Drawing.Size(216, 175)
+		Me.bPanel4.TabIndex = 3
 		'
 		'Label2
 		'
-		Me.Label2.AutoSize = true
-		Me.Label2.Dock = System.Windows.Forms.DockStyle.Top
+		Me.Label2.BackColor = System.Drawing.Color.Black
 		Me.Label2.Font = New System.Drawing.Font("Consolas", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 		Me.Label2.Location = New System.Drawing.Point(0, 0)
 		Me.Label2.Name = "Label2"
@@ -87,32 +88,31 @@ Partial Class Splash
 		'
 		'Panel4
 		'
-		Me.Panel4.BackColor = System.Drawing.Color.MediumTurquoise
-		Me.Panel4.Controls.Add(Me.Panel5)
+		Me.Panel4.BackColor = System.Drawing.Color.Transparent
+		Me.Panel4.Controls.Add(Me.bPanel3)
 		Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.Panel4.Location = New System.Drawing.Point(3, 216)
+		Me.Panel4.Location = New System.Drawing.Point(3, 246)
 		Me.Panel4.Name = "Panel4"
-		Me.Panel4.Size = New System.Drawing.Size(339, 152)
+		Me.Panel4.Size = New System.Drawing.Size(345, 175)
 		Me.Panel4.TabIndex = 2
 		'
-		'Panel5
+		'bPanel3
 		'
-		Me.Panel5.BackColor = System.Drawing.Color.Plum
-		Me.Panel5.Controls.Add(Me.Label3)
-		Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.Panel5.Location = New System.Drawing.Point(0, 0)
-		Me.Panel5.Name = "Panel5"
-		Me.Panel5.Size = New System.Drawing.Size(339, 152)
-		Me.Panel5.TabIndex = 1
+		Me.bPanel3.BackColor = System.Drawing.Color.Transparent
+		Me.bPanel3.Controls.Add(Me.Label3)
+		Me.bPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.bPanel3.Location = New System.Drawing.Point(0, 0)
+		Me.bPanel3.Name = "bPanel3"
+		Me.bPanel3.Size = New System.Drawing.Size(345, 175)
+		Me.bPanel3.TabIndex = 1
 		'
 		'Label3
 		'
-		Me.Label3.AutoSize = true
-		Me.Label3.Dock = System.Windows.Forms.DockStyle.Right
+		Me.Label3.BackColor = System.Drawing.Color.Black
 		Me.Label3.Font = New System.Drawing.Font("Consolas", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.Label3.Location = New System.Drawing.Point(67, 0)
+		Me.Label3.Location = New System.Drawing.Point(54, 0)
 		Me.Label3.Name = "Label3"
-		Me.Label3.Size = New System.Drawing.Size(272, 51)
+		Me.Label3.Size = New System.Drawing.Size(272, 57)
 		Me.Label3.TabIndex = 2
 		Me.Label3.Text = "Version 1.0.1 Release"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"This is the first relese version."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Design for Windows 7 or"& _ 
     " later."
@@ -120,34 +120,35 @@ Partial Class Splash
 		'
 		'Panel2
 		'
-		Me.Panel2.BackColor = System.Drawing.Color.MediumTurquoise
-		Me.Panel2.Controls.Add(Me.Panel3)
+		Me.Panel2.BackColor = System.Drawing.Color.Transparent
+		Me.Panel2.Controls.Add(Me.bPanel1)
 		Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.Panel2.Location = New System.Drawing.Point(3, 3)
 		Me.Panel2.Name = "Panel2"
-		Me.Panel2.Size = New System.Drawing.Size(339, 207)
+		Me.Panel2.Size = New System.Drawing.Size(345, 237)
 		Me.Panel2.TabIndex = 1
 		'
-		'Panel3
+		'bPanel1
 		'
-		Me.Panel3.BackColor = System.Drawing.Color.PaleGreen
-		Me.Panel3.Controls.Add(Me.Button2)
-		Me.Panel3.Controls.Add(Me.Button1)
-		Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.Panel3.Location = New System.Drawing.Point(0, 0)
-		Me.Panel3.Name = "Panel3"
-		Me.Panel3.Size = New System.Drawing.Size(339, 207)
-		Me.Panel3.TabIndex = 1
+		Me.bPanel1.BackColor = System.Drawing.Color.Transparent
+		Me.bPanel1.Controls.Add(Me.Button2)
+		Me.bPanel1.Controls.Add(Me.Button1)
+		Me.bPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.bPanel1.Location = New System.Drawing.Point(0, 0)
+		Me.bPanel1.Name = "bPanel1"
+		Me.bPanel1.Size = New System.Drawing.Size(345, 237)
+		Me.bPanel1.TabIndex = 1
 		'
 		'Button2
 		'
-		Me.Button2.BackColor = System.Drawing.Color.LightGreen
-		Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen
-		Me.Button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.ForestGreen
-		Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen
+		Me.Button2.BackColor = System.Drawing.Color.Silver
+		Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+		Me.Button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray
+		Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray
 		Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
 		Me.Button2.Font = New System.Drawing.Font("微软雅黑", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
-		Me.Button2.Location = New System.Drawing.Point(203, 124)
+		Me.Button2.ForeColor = System.Drawing.Color.Black
+		Me.Button2.Location = New System.Drawing.Point(193, 148)
 		Me.Button2.Name = "Button2"
 		Me.Button2.Size = New System.Drawing.Size(133, 37)
 		Me.Button2.TabIndex = 2
@@ -156,54 +157,57 @@ Partial Class Splash
 		'
 		'Button1
 		'
-		Me.Button1.BackColor = System.Drawing.Color.LightGreen
-		Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen
-		Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.ForestGreen
-		Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen
+		Me.Button1.BackColor = System.Drawing.Color.Silver
+		Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+		Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray
+		Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray
 		Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
 		Me.Button1.Font = New System.Drawing.Font("微软雅黑", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
-		Me.Button1.Location = New System.Drawing.Point(203, 167)
+		Me.Button1.ForeColor = System.Drawing.Color.Black
+		Me.Button1.Location = New System.Drawing.Point(193, 191)
 		Me.Button1.Name = "Button1"
 		Me.Button1.Size = New System.Drawing.Size(133, 37)
 		Me.Button1.TabIndex = 1
 		Me.Button1.Text = "Skip"
 		Me.Button1.UseVisualStyleBackColor = false
 		'
-		'Panel1
+		'bPanel2
 		'
-		Me.Panel1.BackColor = System.Drawing.Color.PowderBlue
-		Me.Panel1.Controls.Add(Me.Label1)
-		Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.Panel1.Location = New System.Drawing.Point(348, 3)
-		Me.Panel1.Name = "Panel1"
-		Me.Panel1.Size = New System.Drawing.Size(212, 207)
-		Me.Panel1.TabIndex = 0
+		Me.bPanel2.BackColor = System.Drawing.Color.Transparent
+		Me.bPanel2.Controls.Add(Me.Label1)
+		Me.bPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.bPanel2.Location = New System.Drawing.Point(354, 3)
+		Me.bPanel2.Name = "bPanel2"
+		Me.bPanel2.Size = New System.Drawing.Size(216, 237)
+		Me.bPanel2.TabIndex = 0
 		'
 		'Label1
 		'
-		Me.Label1.AutoSize = true
-		Me.Label1.Dock = System.Windows.Forms.DockStyle.Bottom
+		Me.Label1.BackColor = System.Drawing.Color.Black
 		Me.Label1.Font = New System.Drawing.Font("微软雅黑", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.Label1.Location = New System.Drawing.Point(0, 115)
+		Me.Label1.Location = New System.Drawing.Point(21, 148)
 		Me.Label1.Name = "Label1"
-		Me.Label1.Size = New System.Drawing.Size(184, 92)
+		Me.Label1.Size = New System.Drawing.Size(168, 50)
 		Me.Label1.TabIndex = 0
-		Me.Label1.Text = "  Develop"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" "
+		Me.Label1.Text = "Develop"
 		'
 		'Timer1
 		'
 		Me.Timer1.Enabled = true
-		Me.Timer1.Interval = 3500
+		Me.Timer1.Interval = 10000
 		'
 		'Splash
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 12!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.BackColor = System.Drawing.Color.Black
-		Me.ClientSize = New System.Drawing.Size(563, 371)
+		Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
+		Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+		Me.ClientSize = New System.Drawing.Size(573, 424)
 		Me.ControlBox = false
 		Me.Controls.Add(Me.TableLayoutPanel1)
 		Me.Cursor = System.Windows.Forms.Cursors.AppStarting
+		Me.DoubleBuffered = true
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
 		Me.MaximizeBox = false
 		Me.MinimizeBox = false
@@ -211,29 +215,26 @@ Partial Class Splash
 		Me.ShowInTaskbar = false
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.TableLayoutPanel1.ResumeLayout(false)
-		Me.Panel6.ResumeLayout(false)
-		Me.Panel6.PerformLayout
+		Me.bPanel4.ResumeLayout(false)
 		Me.Panel4.ResumeLayout(false)
-		Me.Panel5.ResumeLayout(false)
-		Me.Panel5.PerformLayout
+		Me.bPanel3.ResumeLayout(false)
 		Me.Panel2.ResumeLayout(false)
-		Me.Panel3.ResumeLayout(false)
-		Me.Panel1.ResumeLayout(false)
-		Me.Panel1.PerformLayout
+		Me.bPanel1.ResumeLayout(false)
+		Me.bPanel2.ResumeLayout(false)
 		Me.ResumeLayout(false)
 
 End Sub
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents Panel6 As System.Windows.Forms.Panel
+    Friend WithEvents bPanel4 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Panel4 As System.Windows.Forms.Panel
-    Friend WithEvents Panel5 As System.Windows.Forms.Panel
+    Friend WithEvents bPanel3 As System.Windows.Forms.Panel
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents Panel3 As System.Windows.Forms.Panel
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents bPanel2 As System.Windows.Forms.Panel
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
 	Friend WithEvents Button1 As Button
 	Friend WithEvents Button2 As Button
+	Friend WithEvents bPanel1 As Panel
 End Class

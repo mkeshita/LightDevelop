@@ -1,7 +1,7 @@
-﻿Public Class Form1
+﻿Public Class FormMain
     Dim man As Manager
     Dim page As New Blank
-    Dim sav As Saver
+    Dim sav As CodeGenerater
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         man = New Manager(page, PropertyGrid1, TextBox1)
@@ -22,9 +22,9 @@
     Private Sub ViewSourceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewSourceToolStripMenuItem.Click
         SaveFileDialog1.Filter = "Code file|*.vb|Text file|*.txt|All files|*.*"
         If SaveFileDialog1.ShowDialog() = DialogResult.Cancel Then Exit Sub
-		sav = New Saver(man)
+		sav = New CodeGenerater(man)
         Dim i = New IO.StreamWriter(SaveFileDialog1.FileName, False)
-        i.Write(sav.CompileForm)
+        i.Write(sav.Compile)
         i.Flush()
         i.Close()
     End Sub
@@ -35,7 +35,7 @@
 
 		Status.Text = "Compiling..."
 		Progress.Style = ProgressBarStyle.Marquee
-        Dim cr = New CodeRunner(SaveFileDialog1.FileName, New Saver(man).CompileForm, man._f.Text, man)
+        Dim cr = New CodeRunner(SaveFileDialog1.FileName, New CodeGenerater(man).Compile, man.DesignerForm.Text, man)
         cr.Compile(SaveFileDialog1.FileName)
 		Progress.Style = ProgressBarStyle.Blocks
 

@@ -142,11 +142,11 @@
     <Compile Include="EditingLib\RtbHighlight.vb" />
     <Compile Include="EditingLib\RtbTabs.vb" />
     <Compile Include="Extension.vb" />
-    <Compile Include="Form1.vb">
+    <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="FormMain.Designer.vb">
+      <DependentUpon>FormMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditingLib\Keywords.vb" />
@@ -198,11 +198,11 @@
     <EmbeddedResource Include="CodeEdit.resx">
       <DependentUpon>CodeEdit.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.en-US.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="FormMain.en-US.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CoreLib\DialogError.resx">
       <DependentUpon>DialogError.vb</DependentUpon>
