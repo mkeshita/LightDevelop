@@ -42,6 +42,7 @@ Partial Class FormMain
 		Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ProgramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.CreateExecutableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.BuildExecutableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ReferencesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -59,7 +60,6 @@ Partial Class FormMain
 		Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
 		Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-		Me.BuildExecutableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.Panel1.SuspendLayout
 		Me.Panel2.SuspendLayout
 		Me.MenuStrip1.SuspendLayout
@@ -175,6 +175,11 @@ Partial Class FormMain
 		Me.CreateExecutableToolStripMenuItem.Name = "CreateExecutableToolStripMenuItem"
 		resources.ApplyResources(Me.CreateExecutableToolStripMenuItem, "CreateExecutableToolStripMenuItem")
 		'
+		'BuildExecutableToolStripMenuItem
+		'
+		Me.BuildExecutableToolStripMenuItem.Name = "BuildExecutableToolStripMenuItem"
+		resources.ApplyResources(Me.BuildExecutableToolStripMenuItem, "BuildExecutableToolStripMenuItem")
+		'
 		'ReferencesToolStripMenuItem
 		'
 		Me.ReferencesToolStripMenuItem.Name = "ReferencesToolStripMenuItem"
@@ -277,11 +282,6 @@ Partial Class FormMain
 		'OpenFileDialog1
 		'
 		Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-		'
-		'BuildExecutableToolStripMenuItem
-		'
-		Me.BuildExecutableToolStripMenuItem.Name = "BuildExecutableToolStripMenuItem"
-		resources.ApplyResources(Me.BuildExecutableToolStripMenuItem, "BuildExecutableToolStripMenuItem")
 		'
 		'FormMain
 		'

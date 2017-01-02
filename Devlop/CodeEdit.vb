@@ -31,7 +31,8 @@ Public Class CodeEdit
 
 		If Settings.EnableCodeSnippets Then
 			Try
-				Dim x = Xml.XmlReader.Create(Settings.CodeSnippetsLocation)
+				Dim x = Xml.XmlReader.Create(
+						Settings.CodeSnippetsLocation, New Xml.XmlReaderSettings() With {.ProhibitDtd = False})
 				x.ReadToFollowing("Item")
 				Do
 					Dim snipTitle, snipText As String

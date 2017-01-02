@@ -194,7 +194,7 @@ Partial Class Splash
 		'Timer1
 		'
 		Me.Timer1.Enabled = true
-		Me.Timer1.Interval = 10000
+		Me.Timer1.Interval = 5000
 		'
 		'Splash
 		'

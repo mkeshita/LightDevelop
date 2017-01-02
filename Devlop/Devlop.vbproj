@@ -151,10 +151,10 @@
     </Compile>
     <Compile Include="EditingLib\Keywords.vb" />
     <Compile Include="CoreLib\Manager.vb" />
-    <Compile Include="CoreLib\ReferenceEdit.Designer.vb">
-      <DependentUpon>ReferenceEdit.vb</DependentUpon>
+    <Compile Include="CoreLib\ProjectSettings.Designer.vb">
+      <DependentUpon>ProjectSettings.vb</DependentUpon>
     </Compile>
-    <Compile Include="CoreLib\ReferenceEdit.vb">
+    <Compile Include="CoreLib\ProjectSettings.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CoreLib\Saver.vb" />
@@ -207,8 +207,8 @@
     <EmbeddedResource Include="CoreLib\DialogError.resx">
       <DependentUpon>DialogError.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CoreLib\ReferenceEdit.resx">
-      <DependentUpon>ReferenceEdit.vb</DependentUpon>
+    <EmbeddedResource Include="CoreLib\ProjectSettings.resx">
+      <DependentUpon>ProjectSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

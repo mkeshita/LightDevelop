@@ -435,22 +435,22 @@
     <value>Program Menu</value>
   </data>
   <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>151, 22</value>
   </data>
   <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Options</value>
   </data>
   <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>148, 6</value>
   </data>
   <data name="SplittedViewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>151, 22</value>
   </data>
   <data name="SplittedViewToolStripMenuItem.Text" xml:space="preserve">
     <value>Splitted View</value>
   </data>
   <data name="StackViewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>151, 22</value>
   </data>
   <data name="StackViewToolStripMenuItem.Text" xml:space="preserve">
     <value>Stack View</value>
@@ -462,7 +462,7 @@
     <value>Tools</value>
   </data>
   <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>111, 22</value>
   </data>
   <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
     <value>About</value>
@@ -726,6 +726,12 @@
   <data name="&gt;&gt;CreateExecutableToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;BuildExecutableToolStripMenuItem.Name" xml:space="preserve">
+    <value>BuildExecutableToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;BuildExecutableToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ReferencesToolStripMenuItem.Name" xml:space="preserve">
     <value>ReferencesToolStripMenuItem</value>
   </data>
@@ -815,12 +821,6 @@
   </data>
   <data name="&gt;&gt;OpenFileDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BuildExecutableToolStripMenuItem.Name" xml:space="preserve">
-    <value>BuildExecutableToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;BuildExecutableToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormMain</value>

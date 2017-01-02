@@ -64,15 +64,17 @@
     End Sub
 
     Private Sub ReferencesToolStripMenuItem_Click( sender As Object,  e As EventArgs) Handles ReferencesToolStripMenuItem.Click
-        Dim ref As New ReferencesEdit(man)
+        Dim ref As New ProjectSettings(man)
         ref.ShowDialog
     End Sub
 
 	Private Sub ToolStripButton2_CheckedChanged(sender As Object, e As EventArgs) Handles ToolStripButton2.CheckedChanged
 		If ToolStripButton2.Checked Then
+			' QUESTION: if i add this line then program crash
+            ' page.MdiParent = Me
 			page.Show()
 		Else
-			page.Hide()
+			page.Close()
 		End If
 	End Sub
 

@@ -6,35 +6,35 @@
 ]>
 <Snippets>
   <Item name ="For">
-    For i As Integer = 0 To 100
+    For i As Integer = 0 To 100\n
     Next i
   </Item>
   <Item name ="ForEach">
-    For Each item In array
+    For Each item In array\n
     Next
   </Item>
   <Item name ="If">
-    If cond Then
+    If cond Then\n
     End If
   </Item>
   <Item name ="IfElse">
-    If cond Then
-    Else
+    If cond Then\n
+    Else\n
     End If
   </Item>
   <Item name ="Select">
-    Select Case thing
-    Case 1
-    Case 2
+    Select Case thing\n
+    Case 1\n
+    Case 2\n
     End Select
   </Item>
   <Item name ="Sub">
-    Private Sub yourSub()
+    Private Sub yourSub()\n
     End Sub
   </Item>
   <Item name ="Function">
-    Private Function yourFunc() As Integer
-    Return 0
+    Private Function yourFunc() As Integer\n
+    Return 0\n
     End Sub
   </Item>
 </Snippets>
