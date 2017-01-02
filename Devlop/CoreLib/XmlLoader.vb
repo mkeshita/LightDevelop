@@ -17,6 +17,7 @@
 			x.ReadToFollowing("formAttr")
 			_m.DesignerForm.Text = x.GetAttribute("name")
 			ReadControlDecl(x, _m.DesignerForm)
+
 			Do While x.ReadToNextSibling("controlAttr")
 				Dim name = x.GetAttribute("name"),
 					type = x.GetAttribute("controlKind")
@@ -27,7 +28,23 @@
 
 				ReadControlDecl(x, c)
 			Loop
+
+			Dim ref As New Specialized.StringCollection, imp As New List(Of String)
+			x.ReadToFollowing("projSettings")
+			x.ReadToFollowing("refItem")
+			Do
+				ref.Add(x.ReadString())
+			Loop While x.ReadToNextSibling("refItem")
+
+			x.ReadToFollowing("importItem")
+			Do
+				imp.Add(x.ReadString())
+			Loop While x.ReadToNextSibling("importItem")
+
 			x.Close
+
+			_m.References = ref
+			_m.ImportStatments = imp
 		Catch ex As Exception
 			MessageBox.Show("Bad form file format! ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 			Exit Sub

@@ -7,23 +7,40 @@
 
 	Public Function CompileToXml() As String
 		Dim sb As New IO.StringWriter()
-		Dim x = Xml.XmlWriter.Create(sb, New Xml.XmlWriterSettings() With{
-												.Indent = True, .ConformanceLevel = Xml.ConformanceLevel.Fragment})
+		Dim x = Xml.XmlWriter.Create(sb, New Xml.XmlWriterSettings() With {
+											.Indent = True, .ConformanceLevel = Xml.ConformanceLevel.Fragment})
 		x.WriteRaw("<?xml version=""1.0"" ?>")
-		x.WriteStartElement("formData")
-			x.WriteStartElement("formAttr")
-			x.WriteAttributeString("name", _m.DesignerForm.Text)
-				WriteAttrDeclXml(x, _m.DesignerForm)
+		x.WriteStartElement("projData")
+			x.WriteStartElement("formData")
+				x.WriteStartElement("formAttr")
+				x.WriteAttributeString("name", _m.DesignerForm.Text)
+					WriteAttrDeclXml(x, _m.DesignerForm)
+				x.WriteEndElement()
+
+				For Each c In _m.DictControlSizer
+					x.WriteStartElement("controlAttr")
+					x.WriteAttributeString("name", _m.DictControlName(c.Key))
+					x.WriteAttributeString("controlKind", c.Key.GetType().Name)
+						WriteAttrDeclXml(x, c.Key)
+					x.WriteEndElement()
+				Next
 			x.WriteEndElement()
 
-			For Each c In _m.DictControlSizer
-				x.WriteStartElement("controlAttr")
-				x.WriteAttributeString("name", _m.DictControlName(c.Key))
-				x.WriteAttributeString("controlKind", c.Key.GetType().Name)
-					WriteAttrDeclXml(x, c.Key)
+			x.WriteStartElement("projSettings")
+				x.WriteStartElement("references")
+					For Each ref In _m.References
+						x.WriteElementString("refItem", ref)
+					Next
 				x.WriteEndElement()
-			Next
-		x.WriteEndElement()
+
+				x.WriteStartElement("imports")
+					For Each imp In _m.ImportStatments
+						x.WriteElementString("importItem", imp)
+					Next
+				x.WriteEndElement()
+			x.WriteEndElement()
+		x.WriteEndElement
+
 		x.Flush
 		sb.Flush
 		Return sb.ToString()

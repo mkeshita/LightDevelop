@@ -34,16 +34,16 @@ Partial Class FormMain
 		Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
 		Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
 		Me.ProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ViewSourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
 		Me.LoadFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
 		Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ProgramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.CreateExecutableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.TestRunToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.BuildExecutableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ReferencesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
+		Me.ProjSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
@@ -100,11 +100,12 @@ Partial Class FormMain
 		'TreeView1
 		'
 		Me.TreeView1.BackColor = System.Drawing.Color.LightSteelBlue
+		Me.TreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None
 		resources.ApplyResources(Me.TreeView1, "TreeView1")
 		Me.TreeView1.HotTracking = true
 		Me.TreeView1.ItemHeight = 20
 		Me.TreeView1.Name = "TreeView1"
-		Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {CType(resources.GetObject("TreeView1.Nodes"),System.Windows.Forms.TreeNode), CType(resources.GetObject("TreeView1.Nodes1"),System.Windows.Forms.TreeNode), CType(resources.GetObject("TreeView1.Nodes2"),System.Windows.Forms.TreeNode)})
+		Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {CType(resources.GetObject("TreeView1.Nodes"),System.Windows.Forms.TreeNode), CType(resources.GetObject("TreeView1.Nodes1"),System.Windows.Forms.TreeNode)})
 		Me.TreeView1.ShowLines = false
 		'
 		'Splitter2
@@ -128,15 +129,10 @@ Partial Class FormMain
 		'
 		'ProjectToolStripMenuItem
 		'
-		Me.ProjectToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewSourceToolStripMenuItem, Me.SaveToolStripMenuItem, Me.ToolStripMenuItem1, Me.LoadFormToolStripMenuItem, Me.ToolStripSeparator2, Me.ExitToolStripMenuItem})
+		Me.ProjectToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripMenuItem, Me.ToolStripMenuItem1, Me.LoadFormToolStripMenuItem, Me.ToolStripSeparator2, Me.ExitToolStripMenuItem})
 		Me.ProjectToolStripMenuItem.Name = "ProjectToolStripMenuItem"
 		resources.ApplyResources(Me.ProjectToolStripMenuItem, "ProjectToolStripMenuItem")
 		Me.ProjectToolStripMenuItem.Tag = ""
-		'
-		'ViewSourceToolStripMenuItem
-		'
-		Me.ViewSourceToolStripMenuItem.Name = "ViewSourceToolStripMenuItem"
-		resources.ApplyResources(Me.ViewSourceToolStripMenuItem, "ViewSourceToolStripMenuItem")
 		'
 		'SaveToolStripMenuItem
 		'
@@ -165,25 +161,30 @@ Partial Class FormMain
 		'
 		'ProgramToolStripMenuItem
 		'
-		Me.ProgramToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateExecutableToolStripMenuItem, Me.BuildExecutableToolStripMenuItem, Me.ReferencesToolStripMenuItem})
+		Me.ProgramToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TestRunToolStripMenuItem, Me.BuildExecutableToolStripMenuItem, Me.ToolStripMenuItem3, Me.ProjSettingsToolStripMenuItem})
 		Me.ProgramToolStripMenuItem.Name = "ProgramToolStripMenuItem"
 		resources.ApplyResources(Me.ProgramToolStripMenuItem, "ProgramToolStripMenuItem")
 		Me.ProgramToolStripMenuItem.Tag = ""
 		'
-		'CreateExecutableToolStripMenuItem
+		'TestRunToolStripMenuItem
 		'
-		Me.CreateExecutableToolStripMenuItem.Name = "CreateExecutableToolStripMenuItem"
-		resources.ApplyResources(Me.CreateExecutableToolStripMenuItem, "CreateExecutableToolStripMenuItem")
+		Me.TestRunToolStripMenuItem.Name = "TestRunToolStripMenuItem"
+		resources.ApplyResources(Me.TestRunToolStripMenuItem, "TestRunToolStripMenuItem")
 		'
 		'BuildExecutableToolStripMenuItem
 		'
 		Me.BuildExecutableToolStripMenuItem.Name = "BuildExecutableToolStripMenuItem"
 		resources.ApplyResources(Me.BuildExecutableToolStripMenuItem, "BuildExecutableToolStripMenuItem")
 		'
-		'ReferencesToolStripMenuItem
+		'ToolStripMenuItem3
 		'
-		Me.ReferencesToolStripMenuItem.Name = "ReferencesToolStripMenuItem"
-		resources.ApplyResources(Me.ReferencesToolStripMenuItem, "ReferencesToolStripMenuItem")
+		Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+		resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
+		'
+		'ProjSettingsToolStripMenuItem
+		'
+		Me.ProjSettingsToolStripMenuItem.Name = "ProjSettingsToolStripMenuItem"
+		resources.ApplyResources(Me.ProjSettingsToolStripMenuItem, "ProjSettingsToolStripMenuItem")
 		'
 		'ToolsToolStripMenuItem
 		'
@@ -323,13 +324,12 @@ End Sub
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents ProjectToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ViewSourceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LoadFormToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Friend WithEvents ProgramToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CreateExecutableToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ReferencesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TestRunToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ProjSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents StatusStrip1 As StatusStrip
 	Friend WithEvents Status As ToolStripStatusLabel
 	Friend WithEvents Progress As ToolStripProgressBar
@@ -349,4 +349,5 @@ End Sub
 	Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents OpenFileDialog1 As OpenFileDialog
 	Friend WithEvents BuildExecutableToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
 End Class
