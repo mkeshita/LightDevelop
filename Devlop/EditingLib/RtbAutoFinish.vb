@@ -1,16 +1,24 @@
-﻿Public Class AutoFinishSup
+﻿Imports System.Text.RegularExpressions
+
+Public Class AutoFinishSup
 	Inherits EditingSupporter
 
 	Public Images As ImageList
 	Public TextFont As Font = Control.DefaultFont
-	Public References As Collections.Specialized.StringCollection
 	Private cuebox As ListView = Nothing, textcue As Label = Nothing
+	Private reslover As New TypeResolver()
 
-	Public Sub New(box As RichTextBox, image As ImageList, assms As Collections.Specialized.StringCollection)
+	Public Sub New(box As RichTextBox, image As ImageList, imp As String())
 		MyBase.New(box)
-		If image Is Nothing Or assms Is Nothing Then Throw New ArgumentNullException()
+		If image Is Nothing Then Throw New ArgumentNullException()
 		Images = image
-		References = assms
+
+		reslover.ImportedPrefix = imp
+		reslover.LoadAssembly(GetType(Int32))			' System.Core
+		reslover.LoadAssembly(GetType(Collection))		' Microsoft.VisualBasic
+		reslover.LoadAssembly(GetType(Pen))				' System.Drawing
+		reslover.LoadAssembly(GetType(Form))			' System.Windows.Forms
+		reslover.BuildList()
 	End Sub
 
 	Private Sub EditTextbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles EditTextBox.KeyPress
@@ -18,33 +26,31 @@
 
         If e.KeyChar = "." Then
 			' if there's nothing to finish then exit
-            If CodeEditHlp.GetLastWord(EditTextBox.Text, EditTextBox.SelectionStart) = "" Then
+            If GetLastWord(EditTextBox.Text, EditTextBox.SelectionStart) = "" Then
                 Exit Sub
             End If
-			
 			' if it's already here then delete it
             If cuebox IsNot Nothing Then
 				DeleteBox()
                 Exit Sub
 			End If
-
-				
+			
             cuebox = CreateCueBox(EditTextBox.GetPositionFromCharIndex(EditTextBox.SelectionStart))
 			textcue = CreateLabel(cuebox.Location)
             textcue.Left += cuebox.Width + 10
 			
-
             AddHandler cuebox.KeyPress,		AddressOf ListBox_KeyPress
             AddHandler cuebox.DoubleClick,	AddressOf ListBox_DoubleClick
             AddHandler cuebox.LostFocus,	AddressOf ListBox_LostFocus
             AddHandler cuebox.SelectedIndexChanged,
 											AddressOf ListBox_SelectionChange
-
-            Dim member As Reflection.MemberInfo() = CodeEditHlp.GuessType(EditTextBox, e.KeyChar, References)
-            If member.Length <> 0 
+			
+			Dim name As String = GetName(EditTextBox, e.KeyChar)
+            Dim member As TypeResolver.SpaceMember = reslover.ResolveType(name)
+            If member IsNot Nothing
                 ' this is a class! add all class member into this box
 
-                For Each mem In member
+                For Each mem In member.Type.GetMembers()
 					' if it's a repeat then skip
                     If cuebox.Items.ContainsKey(mem.Name) Then Continue For
 
@@ -67,12 +73,11 @@
                             num = 3
                     End Select
 
-
                     If num >= 0 Then
                         Dim i = cuebox.Items.Add(mem.Name, num)
                         i.Name = mem.Name
 						' set the tag to get info in selectionChange()
-                        i.Tag = member(0).DeclaringType
+                        i.Tag = member.Type
                     Else
 						' unexpected member type
                         Dim i = cuebox.Items.Add(mem.Name)
@@ -85,9 +90,9 @@
                 cuebox.Focus()
             Else
 				' ...is it a namespace name?
-                Dim types = GetTypesInNamespace(GetName(EditTextBox, e.KeyChar))
+                Dim types As List(Of TypeResolver.SpaceMember) = reslover.ResolveNamespace(name)
 
-                If types.Count = 0 Then
+                If types Is Nothing Then
 					' if not, everything is over
                     DeleteBox()
                     Exit Sub
@@ -95,18 +100,18 @@
 
 				' icon switch again
                 For Each t In types
-                    Dim inum As Integer
-                    Select t.Value
-                        Case ElementKind.KindClass
-                            inum = 0
-                        Case ElementKind.KindEnum
-                            inum = 6
-                        Case ElementKind.KindInterface
-                            inum = 7
+                    Dim iconIndex As Integer
+                    Select t.Kind
+                        Case TypeResolver.ElementKind.KindClass
+                            iconIndex = 0
+                        Case TypeResolver.ElementKind.KindEnum
+                            iconIndex = 6
+                        Case TypeResolver.ElementKind.KindInterface
+                            iconIndex = 7
                         Case Else
-                            inum = 0
+                            iconIndex = 0
                     End Select
-                    cuebox.Items.Add(t.Key.Name, inum).Tag = t.Key
+                    cuebox.Items.Add(t.Name, iconIndex).Tag = t.Type
                 Next
 
 				' show it
@@ -250,4 +255,31 @@
 
 		Return text
 	End Function
+
+	Private sepr As Char() = {"+", "-", "*", "/", " ", "(", ")", "{", "}", ",", "&", "^", "="}
+
+	Public Function GetName(rt As RichTextBox, editChar As Char) As String
+        Dim reftxt As String
+        reftxt = rt.Lines(rt.GetLineFromCharIndex(rt.SelectionStart)) & editChar
+        Dim pos = reftxt.LastIndexOf(".")
+        If pos >= 0 Then reftxt = Left(reftxt, pos)
+        reftxt = Trim(reftxt)
+
+        For Each sep In sepr
+            Dim npos = reftxt.LastIndexOf(sep)
+            If npos >= 0 Then reftxt = reftxt.Substring(npos + 1)
+        Next
+        Return reftxt
+    End Function
+
+	Public Function GetLastWord(s As String, i As Integer) As String
+        ' Get the last word.
+        Dim x = Left(s, i)
+        x = Regex.Match(x, "\s*[a-zA-Z]+\s*", RegexOptions.RightToLeft).Value
+
+        ' Remove all whitespaces.
+        x = Regex.Replace(x, "\s", "")
+
+        Return x
+    End Function
 End Class

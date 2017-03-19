@@ -33,6 +33,8 @@ Partial Class CodeEdit
 		Me.Label1 = New System.Windows.Forms.Label()
 		Me.ListBox1 = New System.Windows.Forms.ListBox()
 		Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
+		Me.SaveCode = New System.Windows.Forms.ToolStripDropDownButton()
+		Me.RebuildData = New System.Windows.Forms.ToolStripDropDownButton()
 		Me.StatusStrip1.SuspendLayout
 		Me.SuspendLayout
 		'
@@ -50,7 +52,7 @@ Partial Class CodeEdit
 		Me.RichTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable
 		Me.RichTextBox1.Location = New System.Drawing.Point(12, 12)
 		Me.RichTextBox1.Name = "RichTextBox1"
-		Me.RichTextBox1.Size = New System.Drawing.Size(907, 596)
+		Me.RichTextBox1.Size = New System.Drawing.Size(709, 596)
 		Me.RichTextBox1.TabIndex = 0
 		Me.RichTextBox1.TabStop = false
 		Me.RichTextBox1.Text = ""
@@ -68,13 +70,14 @@ Partial Class CodeEdit
 		Me.ImageList1.Images.SetKeyName(5, "module.bmp")
 		Me.ImageList1.Images.SetKeyName(6, "enum.bmp")
 		Me.ImageList1.Images.SetKeyName(7, "interface.bmp")
+		Me.ImageList1.Images.SetKeyName(8, "namespace.png")
 		'
 		'StatusStrip1
 		'
-		Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LineLabel, Me.RowLabel, Me.SelectLabel})
+		Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LineLabel, Me.RowLabel, Me.SelectLabel, Me.SaveCode, Me.RebuildData})
 		Me.StatusStrip1.Location = New System.Drawing.Point(0, 611)
 		Me.StatusStrip1.Name = "StatusStrip1"
-		Me.StatusStrip1.Size = New System.Drawing.Size(1071, 26)
+		Me.StatusStrip1.Size = New System.Drawing.Size(873, 26)
 		Me.StatusStrip1.TabIndex = 3
 		Me.StatusStrip1.Text = "StatusStrip1"
 		'
@@ -96,10 +99,9 @@ Partial Class CodeEdit
 		'
 		'SelectLabel
 		'
-		Me.SelectLabel.AutoSize = false
 		Me.SelectLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
 		Me.SelectLabel.Name = "SelectLabel"
-		Me.SelectLabel.Size = New System.Drawing.Size(856, 21)
+		Me.SelectLabel.Size = New System.Drawing.Size(415, 21)
 		Me.SelectLabel.Spring = true
 		Me.SelectLabel.Text = "Selection length: 0"
 		'
@@ -109,7 +111,7 @@ Partial Class CodeEdit
 		Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
 		Me.Label1.Font = New System.Drawing.Font("微软雅黑", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
 		Me.Label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-		Me.Label1.Location = New System.Drawing.Point(925, 12)
+		Me.Label1.Location = New System.Drawing.Point(727, 12)
 		Me.Label1.Name = "Label1"
 		Me.Label1.Size = New System.Drawing.Size(134, 20)
 		Me.Label1.TabIndex = 5
@@ -123,7 +125,7 @@ Partial Class CodeEdit
 		Me.ListBox1.FormattingEnabled = true
 		Me.ListBox1.IntegralHeight = false
 		Me.ListBox1.ItemHeight = 17
-		Me.ListBox1.Location = New System.Drawing.Point(925, 35)
+		Me.ListBox1.Location = New System.Drawing.Point(727, 35)
 		Me.ListBox1.Name = "ListBox1"
 		Me.ListBox1.Size = New System.Drawing.Size(134, 573)
 		Me.ListBox1.TabIndex = 6
@@ -133,11 +135,29 @@ Partial Class CodeEdit
 		'
 		Me.ToolTip.AutomaticDelay = 65536
 		'
+		'SaveCode
+		'
+		Me.SaveCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+		Me.SaveCode.Image = CType(resources.GetObject("SaveCode.Image"),System.Drawing.Image)
+		Me.SaveCode.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.SaveCode.Name = "SaveCode"
+		Me.SaveCode.Size = New System.Drawing.Size(81, 24)
+		Me.SaveCode.Text = "&Save code"
+		'
+		'RebuildData
+		'
+		Me.RebuildData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+		Me.RebuildData.Image = CType(resources.GetObject("RebuildData.Image"),System.Drawing.Image)
+		Me.RebuildData.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.RebuildData.Name = "RebuildData"
+		Me.RebuildData.Size = New System.Drawing.Size(162, 24)
+		Me.RebuildData.Text = "Rebuild Sense Database"
+		'
 		'CodeEdit
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 12!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(1071, 637)
+		Me.ClientSize = New System.Drawing.Size(873, 637)
 		Me.Controls.Add(Me.ListBox1)
 		Me.Controls.Add(Me.Label1)
 		Me.Controls.Add(Me.StatusStrip1)
@@ -161,4 +181,6 @@ End Sub
 	Friend WithEvents ListBox1 As ListBox
 	Friend WithEvents RichTextBox1 As RichTextBox
 	Friend WithEvents ToolTip As ToolTip
+	Friend WithEvents SaveCode As ToolStripDropDownButton
+	Friend WithEvents RebuildData As ToolStripDropDownButton
 End Class

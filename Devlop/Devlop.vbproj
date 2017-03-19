@@ -138,9 +138,17 @@
     <Compile Include="CoreLib\XmlLoader.vb" />
     <Compile Include="CoreLib\XmlSaver.vb" />
     <Compile Include="EditingLib\EditingSupporter.vb" />
+    <Compile Include="EditingLib\LoadingDialog.Designer.vb">
+      <DependentUpon>LoadingDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingLib\LoadingDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingLib\RtbAutoFinish.vb" />
+    <Compile Include="EditingLib\RtbCodeSnippet.vb" />
     <Compile Include="EditingLib\RtbHighlight.vb" />
     <Compile Include="EditingLib\RtbTabs.vb" />
+    <Compile Include="EditingLib\TypeResolver.vb" />
     <Compile Include="Extension.vb" />
     <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
@@ -197,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CodeEdit.resx">
       <DependentUpon>CodeEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingLib\LoadingDialog.resx">
+      <DependentUpon>LoadingDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.en-US.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
