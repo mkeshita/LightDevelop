@@ -1,44 +1,47 @@
-﻿Public Class FormMain
-    Dim man As Manager
-    Dim page As New Blank
-    Dim sav As CodeGenerater
+﻿Imports Develop.Core
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        man = New Manager(page, PropertyGrid1, TextBox1)
+Public Class FormMain
+	Dim man As Manager
+	Dim page As New Blank
+	Dim sav As CodeGenerater
 
-        page.MdiParent = Me
-        page.Show()
-    End Sub
+	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+		man = New Manager(page, PropertyGrid1, TextBox1)
 
-    Private Sub TreeView1_NodeMouseDoubleClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles TreeView1.NodeMouseDoubleClick
-        Try
-            Dim c As Control = AddControlHelper.CreatControlToContainer(e.Node.Text, page)
-            man.AddControl(c)
-        Catch ex As Exception
-            MsgBox("Error in creating control!")
-        End Try
-    End Sub
+		page.MdiParent = Me
+		page.Show()
+	End Sub
 
-    Private Sub TestRunToolStripMenuItem_Click( sender As Object,  e As EventArgs) Handles TestRunToolStripMenuItem.Click
+	Private Sub TreeView1_NodeMouseDoubleClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles TreeView1.NodeMouseDoubleClick
+		Try
+			Dim c As Control = AddControlHelper.CreatControlToContainer(e.Node.Text, page)
+			man.AddControl(c)
+		Catch ex As Exception
+			MsgBox("Error in creating control!")
+		End Try
+	End Sub
+
+	Private Sub TestRunToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestRunToolStripMenuItem.Click
 		Status.Text = "Compiling..."
 		Progress.Style = ProgressBarStyle.Marquee
-        Dim cr = New CodeRunner(New CodeGenerater(man).Compile, man.DesignerForm.Text, man)
-        cr.Compile("\temp.exe")
+		Dim cr = New CodeRunner(New CodeGenerater(man).Compile, man.DesignerForm.Text, man)
+		cr.Compile("\temp.exe")
 		Progress.Style = ProgressBarStyle.Blocks
 
-        DialogError.ListBox1.Items.Clear
-        If cr.Errors.Count <> 0 Then
-            For Each er As CodeDom.Compiler.CompilerError In cr.Errors
-                DialogError.ListBox1.Items.Add(
+		DialogError.ListBox1.Items.Clear()
+
+		If cr.Errors.Count <> 0 Then
+			For Each er As CodeDom.Compiler.CompilerError In cr.Errors
+				DialogError.ListBox1.Items.Add(
 					"Error " & er.ErrorNumber & ": " & vbCrLf & er.ErrorText)
-            Next
-            DialogError.ShowDialog
-        Else
-            Status.Text = "Compiled, running..."
-            Shell("\temp.exe")
-        End If
+			Next
+			DialogError.ShowDialog()
+		Else
+			Status.Text = "Compiled, running..."
+			Shell("\temp.exe")
+		End If
 		Status.Text = "Ready"
-    End Sub
+	End Sub
 
 	Private Sub BuildExecutableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BuildExecutableToolStripMenuItem.Click
 		SaveFileDialog1.Filter = "Executable|*.exe"
@@ -46,43 +49,44 @@
 
 		Status.Text = "Compiling..."
 		Progress.Style = ProgressBarStyle.Marquee
-        Dim cr = New CodeRunner(New CodeGenerater(man).Compile, man.DesignerForm.Text, man)
-        cr.Compile(SaveFileDialog1.FileName)
+		Dim cr = New CodeRunner(New CodeGenerater(man).Compile, man.DesignerForm.Text, man)
+		cr.Compile(SaveFileDialog1.FileName)
 		Progress.Style = ProgressBarStyle.Blocks
 
-        DialogError.ListBox1.Items.Clear
-        If cr.Errors.Count <> 0 Then
-            For Each er As CodeDom.Compiler.CompilerError In cr.Errors
-                DialogError.ListBox1.Items.Add(
+		DialogError.ListBox1.Items.Clear()
+
+		If cr.Errors.Count <> 0 Then
+			For Each er As CodeDom.Compiler.CompilerError In cr.Errors
+				DialogError.ListBox1.Items.Add(
 					"Error " & er.ErrorNumber & ": " & vbCrLf & er.ErrorText)
-            Next
-            DialogError.ShowDialog
-        Else
-            Status.Text = "Compiled, running..."
-            Shell(SaveFileDialog1.FileName)
-        End If
+			Next
+			DialogError.ShowDialog()
+		Else
+			Status.Text = "Compiled, running..."
+			Shell(SaveFileDialog1.FileName)
+		End If
 		Status.Text = "Ready"
 	End Sub
 
-    Private Sub SaveToolStripMenuItem_Click( sender As Object,  e As EventArgs) Handles SaveToolStripMenuItem.Click
-        SaveFileDialog1.Filter = "Xml form data|*.xml"
+	Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+		SaveFileDialog1.Filter = "Xml form data|*.xml"
 		If SaveFileDialog1.ShowDialog() = DialogResult.Cancel Then Exit Sub
 
 		Dim s As New IO.StreamWriter(SaveFileDialog1.FileName)
 		s.Write(New XmlSaver(man).CompileToXml())
-		s.Flush
-		s.Close
-    End Sub
+		s.Flush()
+		s.Close()
+	End Sub
 
-    Private Sub ReferencesToolStripMenuItem_Click( sender As Object,  e As EventArgs) Handles ProjSettingsToolStripMenuItem.Click
-        Dim ref As New ProjectSettings(man)
-        ref.ShowDialog
-    End Sub
+	Private Sub ReferencesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProjSettingsToolStripMenuItem.Click
+		Dim ref As New ProjectSettings(man)
+		ref.ShowDialog()
+	End Sub
 
 	Private Sub ToolStripButton2_CheckedChanged(sender As Object, e As EventArgs) Handles ToolStripButton2.CheckedChanged
 		If ToolStripButton2.Checked Then
 			' QUESTION: if i add this line then program crash
-            ' page.MdiParent = Me
+			' page.MdiParent = Me
 			page.Show()
 		Else
 			page.Close()
@@ -92,8 +96,8 @@
 	Private Sub ToolStripButton1_CheckedChanged(sender As Object, e As EventArgs) Handles ToolStripButton1.CheckedChanged
 		If ToolStripButton1.Checked Then
 			CodeEdit.MManager = man
-            CodeEdit.MdiParent = Me
-            CodeEdit.Show()
+			CodeEdit.MdiParent = Me
+			CodeEdit.Show()
 		Else
 			CodeEdit.Close()
 		End If
@@ -108,11 +112,11 @@
 	End Sub
 
 	Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
-		AboutBox.show()
+		AboutBox.Show()
 	End Sub
 
 	Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.Click
-		OptionWindow.show()
+		OptionWindow.Show()
 	End Sub
 
 	Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadFormToolStripMenuItem.Click
