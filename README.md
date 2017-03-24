@@ -8,7 +8,7 @@ A lightweight IDE for Visual Basic .NET, which supports these features:
 
 ## Form editing
 
-![](Markdown\formedit.PNG)
+![](https://github.com/Knowif/LightDevelop/raw/master/Markdown/formedit.png)
 
 - Double click on "Add control panel" to add controls;
 - Right click on controls to delete;
@@ -22,7 +22,7 @@ A lightweight IDE for Visual Basic .NET, which supports these features:
 	
 ## Code editing
 
-![](Markdown\code.PNG)
+![](https://github.com/Knowif/LightDevelop/raw/master/Markdown/code.png)
 
 - Click "Code" on the tool bar to open code window;
 - Double click on snippet panel to insert a code snippet;
