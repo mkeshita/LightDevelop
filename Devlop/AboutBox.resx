@@ -117,63 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TextBox1.Text" xml:space="preserve">
-    <value>change log
-
-v0.9.5
-optmized code highlighting
-optmized code auto-finishing
-
-v0.8.5 (test build)
-rebuilded everything about code editing
-removed line numbers
-bugfixes
-
-v0.8.0 (test build)
-line numbers
-
-v0.7.8
-code rebuilds
-bugfixes
-
-v0.7.5 (test build)
-namespace auto-finishing
-auto-finishing now with icons
-
-v0.7.0
-class member auto-finishing rebuilded with new gui
-now can remove controls
-
-v0.6.5
-bugfixes
-
-v0.6.0 (test build)
-faster code highlighting
-very basic class member auto-finishing
-big bugfixes
-
------ early versions (all test build) -----
-
-v0.4.0
-code highlighting
-
-v0.3.0
-code editing
-
-v0.2.5
-more code generating
-
-v0.2.0
-code generating
-
-v0.1.5
-control adding
-
-v0.1.0
-property editing
-control dragging &amp; sizing
-</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

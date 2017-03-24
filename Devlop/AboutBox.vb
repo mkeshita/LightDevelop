@@ -11,7 +11,11 @@
 	End Sub
 
 	Private Sub AboutBox_Load(sender As Object, e As EventArgs) Handles Me.Load
-		SetTransp({TableLayoutPanel, LabelCompanyName, LabelCopyright, LabelProductName, 
+		SetTransp({TableLayoutPanel, LinkLabel1, LabelProductName,
 					LabelVersion, OKButton})
+	End Sub
+
+	Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+		Interaction.Shell("cmd /c ""start http://github.com/Knowif/LightDevelop""", AppWinStyle.Hide, False)
 	End Sub
 End Class
