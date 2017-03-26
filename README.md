@@ -1,5 +1,11 @@
 # LightDevelop
-A lightweight IDE for Visual Basic .NET, which supports these features:
+A lightweight IDE for Visual Basic .NET, which 
+**does not depends any third-party libraries** such like:
+
+- [.NET Compiler Platform ("Roslyn")](https://github.com/dotnet/roslyn) or
+- [AvalonEdit](https://github.com/icsharpcode/AvalonEdit)
+
+...and supports these features:
 
 - Form editing & saving
 - Syntax highlighting
@@ -29,3 +35,5 @@ A lightweight IDE for Visual Basic .NET, which supports these features:
 - When typing a dot (".")...
 	- after a namespace like "System.IO" or just "IO", there is namespace member auto-finishing;
 	- after a type like "Point" or "Drawing.Point", there is class member auto-finishing.
+
+**Note:** A much more complex code-editing control is under developing in [this branch](https://github.com/Knowif/LightDevelop/tree/EditControls).

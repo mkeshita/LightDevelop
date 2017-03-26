@@ -12,6 +12,14 @@ Public Class CodeEdit
 		snippeter As CodeSnippetSup
 	Dim snippets As New Dictionary(Of String, String)
 
+	Private Sub SaveCode_Click(sender As Object, e As EventArgs) Handles SaveCode.Click
+		_manager.UserCode = Me.RichTextBox1.Text
+	End Sub
+
+	Private Sub RebuildData_Click(sender As Object, e As EventArgs) Handles RebuildData.Click
+		finisher = New AutoFinishSup(RichTextBox1, ImageList1, _manager.ImportStatments.ToArray)
+	End Sub
+
 	Public Property MManager() As Manager
 		Get
 			Return _manager
@@ -46,10 +54,4 @@ Public Class CodeEdit
 			RichTextBox1.SelectionLength
 	End Sub
 
-	'Private Sub ListBox1_Click(sender As Object, e As EventArgs) Handles ListBox1.Click
-	'	If ListBox1.SelectedIndices.Count = 1 Then
-	'		Dim snip As String = snippets(ListBox1.SelectedItem).Replace("\n", vbCrLf)
-	'		ToolTip.Show(snip, ListBox1,ListBox1.Width, 0, 2000)
-	'	End If
-	'End Sub
 End Class
