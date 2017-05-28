@@ -4,6 +4,7 @@
 		Dim _m As Manager
 		Dim _assm As CodeDom.Compiler.CompilerResults
 		Dim compiled As Boolean
+
 		Public Sub New(sourceCode As String, entClass As String, m As Manager, Optional entMethod As String = "Main")
 			_source = sourceCode
 			_entC = entClass
@@ -29,7 +30,5 @@
 				Return _assm.Errors
 			End Get
 		End Property
-
 	End Class
-
 End Namespace

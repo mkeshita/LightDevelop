@@ -1,6 +1,7 @@
 ﻿Namespace Core
 	Public Class XmlLoader
 		Private _m As Manager
+		Private _ctrl As New ControlCreater
 
 		Sub New(m As Manager)
 			_m = m
@@ -12,7 +13,7 @@
 								MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.No Then Exit Sub
 			End If
 			Dim co As New Dictionary(Of Control, Control)(_m.DictControlSizer)
-
+			
 			Try
 				Dim x = Xml.XmlReader.Create(file)
 				x.ReadToFollowing("formAttr")
@@ -23,7 +24,7 @@
 					Dim name = x.GetAttribute("name"),
 						type = x.GetAttribute("controlKind")
 
-					Dim c = AddControlHelper.CreatControlToContainer(type, _m.DesignerForm)
+					Dim c = _ctrl.CreatControlToContainer(type, _m.DesignerForm)
 					_m.AddControl(c)
 					_m.DictControlName(c) = name
 

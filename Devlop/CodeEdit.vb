@@ -1,15 +1,14 @@
-﻿Imports System.Text.RegularExpressions
-Imports Develop.Core
+﻿Imports Develop.Core
 Imports Develop.Editing
 
 Public Class CodeEdit
 	Friend Shared opened As Boolean = False
 
-	Dim _manager As Manager,
-		highlighter As HighlightingSup,
-		finisher As AutoFinishSup,
-		taber As AutoTabsSup,
-		snippeter As CodeSnippetSup
+	Dim _manager As Manager
+	Public Highlighter As HighlightingSup,
+			Finisher As AutoFinishSup,
+			Taber As AutoTabsSup,
+			Snippeter As CodeSnippetSup
 	Dim snippets As New Dictionary(Of String, String)
 
 	Private Sub SaveCode_Click(sender As Object, e As EventArgs) Handles SaveCode.Click
@@ -17,7 +16,7 @@ Public Class CodeEdit
 	End Sub
 
 	Private Sub RebuildData_Click(sender As Object, e As EventArgs) Handles RebuildData.Click
-		finisher = New AutoFinishSup(RichTextBox1, ImageList1, _manager.ImportStatments.ToArray)
+		Finisher = New AutoFinishSup(RichTextBox1, ImageList1, _manager.ImportStatments.ToArray)
 	End Sub
 
 	Public Property MManager() As Manager
@@ -39,10 +38,10 @@ Public Class CodeEdit
 		opened = True
 		Me.DoubleBuffered = True
 
-		highlighter = New HighlightingSup(RichTextBox1, Keywords.KeyTable)
-		finisher = New AutoFinishSup(RichTextBox1, ImageList1, _manager.ImportStatments.ToArray)
-		taber = New AutoTabsSup(RichTextBox1)
-		snippeter = New CodeSnippetSup(RichTextBox1, ListBox1)
+		Highlighter = New HighlightingSup(RichTextBox1, Keywords.KeyTable)
+		Finisher = New AutoFinishSup(RichTextBox1, ImageList1, _manager.ImportStatments.ToArray)
+		Taber = New AutoTabsSup(RichTextBox1)
+		Snippeter = New CodeSnippetSup(RichTextBox1, ListBox1)
 	End Sub
 
 	Private Sub RichTextBox1_SelectionChanged(sender As Object, e As EventArgs) Handles RichTextBox1.SelectionChanged

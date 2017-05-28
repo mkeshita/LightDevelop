@@ -6,6 +6,7 @@ Namespace Editing
 		Inherits EditingSupporter
 
 		Public KeyTable() As KeyValuePair(Of String, Color)
+		Public ErrorLines As New List(Of Integer)
 
 		Public Sub New(box As RichTextBox, table() As KeyValuePair(Of String, Color))
 			MyBase.New(box)
@@ -13,30 +14,42 @@ Namespace Editing
 			If table Is Nothing Then Throw New ArgumentNullException()
 			KeyTable = table
 		End Sub
+		
 
-		Private Sub EditTextBox_TextChanged(sender As Object, e As EventArgs) Handles EditTextBox.TextChanged
+		Private Sub TextBox_TextChanged(sender As Object, e As EventArgs) Handles TextBox.TextChanged
+			Highlight()
+		End Sub
+
+		Public Sub Highlight()
+			Dim pos = TextBox.SelectionStart
+			DisableRedraw(TextBox)
+			TextBox.SelectAll()
+			TextBox.SelectionColor = Color.Black
+			TextBox.SelectionBackColor = Color.White
+
 			If Settings.EnableHighlight Then
-				Dim pos = EditTextBox.SelectionStart
-				DisableRedraw(EditTextBox)
-				EditTextBox.SelectAll()
-				EditTextBox.SelectionColor = Color.Black
-
 				For Each pair In KeyTable
-					Dim i = Regex.Matches(EditTextBox.Text, pair.Key)
+					Dim i = Regex.Matches(TextBox.Text, pair.Key)
 					If i.Count > 0 Then
 						For Each mat As Match In i
-							EditTextBox.SelectionStart = mat.Index
-							EditTextBox.SelectionLength = mat.Length
-							EditTextBox.SelectionColor = pair.Value
+							TextBox.SelectionStart = mat.Index
+							TextBox.SelectionLength = mat.Length
+							TextBox.SelectionColor = pair.Value
 						Next
 					End If
 				Next
-
-				EditTextBox.SelectionStart = pos
-				EditTextBox.SelectionLength = 0
-				EnableRedraw(EditTextBox)
-				EditTextBox.Refresh()
 			End If
+							
+			For Each l As Integer In ErrorLines
+				Dim pStart As Integer = TextBox.GetFirstCharIndexFromLine(l)
+				TextBox.Select(pStart, TextBox.Lines(l).Length)
+				TextBox.SelectionBackColor = Color.Pink
+			Next
+
+			TextBox.SelectionStart = pos
+			TextBox.SelectionLength = 0
+			EnableRedraw(TextBox)
+			TextBox.Refresh()
 		End Sub
 
 		<DllImport("user32.dll")>

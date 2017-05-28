@@ -3,8 +3,8 @@
 		Dim ctrlCount As Integer = 0
 
 		Friend DictControlSizer As Dictionary(Of Control, Control)   'This is the Main-control to Sizer dict.
-		Friend DictControlDragClass As Dictionary(Of Control, DragSup)   'This is the Main-control to Drag-Support class dict.
-		Friend DictControlSizeClass As Dictionary(Of Control, SizeSup)   'This is the Main-control to Size-Support class dict.
+		Friend DictControlDragClass As Dictionary(Of Control, DragSupporter)   'This is the Main-control to Drag-Support class dict.
+		Friend DictControlSizeClass As Dictionary(Of Control, SizeSupporter)   'This is the Main-control to Size-Support class dict.
 		Friend DictControlName As Dictionary(Of Control, String)    'This is the dict. of Main-control to its Name
 
 		Friend DesignerForm As Form
@@ -22,8 +22,8 @@
 			_txtnam = Txt
 
 			DictControlSizer = New Dictionary(Of Control, Control)
-			DictControlDragClass = New Dictionary(Of Control, DragSup)
-			DictControlSizeClass = New Dictionary(Of Control, SizeSup)
+			DictControlDragClass = New Dictionary(Of Control, DragSupporter)
+			DictControlSizeClass = New Dictionary(Of Control, SizeSupporter)
 			DictControlName = New Dictionary(Of Control, String)
 
 			AddHandler DesignerForm.Click, AddressOf ctrl_Click
@@ -45,8 +45,6 @@
 									 "System.Data",
 									 "System.Collections",
 									 "System.Collections.Generic",
-									 "System.Drawing",
-									 "System.Linq",
 									 "Microsoft.VisualBasic"})
 		End Sub
 
@@ -60,8 +58,8 @@
 			sizer.Size = New Size(10, 10)
 			sizer.Text = ""
 
-			Dim ds As New DragSup(c)
-			Dim ss As New SizeSup(c, sizer)
+			Dim ds As New DragSupporter(c)
+			Dim ss As New SizeSupporter(c, sizer)
 
 			AddHandler c.MouseUp, AddressOf ctrl_Click
 

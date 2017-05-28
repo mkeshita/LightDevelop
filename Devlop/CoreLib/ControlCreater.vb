@@ -1,5 +1,6 @@
 ﻿Namespace Core
-	Module AddControlHelper
+	Class ControlCreater
+
 		Public Names As String() = {
 			"Button",
 			"CheckBox",
@@ -25,7 +26,7 @@
 		}
 
 		''' <summary>
-		''' Create a contol of given type to the given container.
+		''' Creates a contol of given type to the given container.
 		''' </summary>
 		''' <param name="str">The type string of the control to create. </param>
 		''' <param name="cont">The container which the control will create to. </param>
@@ -41,7 +42,7 @@
 		End Function
 
 		''' <summary>
-		''' Create a contol of given type.
+		''' Creates a contol of given type.
 		''' </summary>
 		''' <param name="str">The type string of the control to create. </param>
 		''' <returns>The created control. </returns>
@@ -66,6 +67,6 @@
 			Next
 			Return -1
 		End Function
-	End Module
+	End Class
 
 End Namespace

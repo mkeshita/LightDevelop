@@ -35,32 +35,32 @@ Partial Class CodeEdit
 		Me.Label1 = New System.Windows.Forms.Label()
 		Me.ListBox1 = New System.Windows.Forms.ListBox()
 		Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
-		Me.StatusStrip1.SuspendLayout()
-		Me.SuspendLayout()
+		Me.StatusStrip1.SuspendLayout
+		Me.SuspendLayout
 		'
 		'RichTextBox1
 		'
-		Me.RichTextBox1.AcceptsTab = True
-		Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.RichTextBox1.AcceptsTab = true
+		Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 		Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.RichTextBox1.CausesValidation = False
-		Me.RichTextBox1.DetectUrls = False
-		Me.RichTextBox1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.RichTextBox1.HideSelection = False
+		Me.RichTextBox1.CausesValidation = false
+		Me.RichTextBox1.DetectUrls = false
+		Me.RichTextBox1.Font = New System.Drawing.Font("Consolas", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.RichTextBox1.HideSelection = false
 		Me.RichTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable
 		Me.RichTextBox1.Location = New System.Drawing.Point(12, 12)
 		Me.RichTextBox1.Name = "RichTextBox1"
 		Me.RichTextBox1.Size = New System.Drawing.Size(709, 596)
 		Me.RichTextBox1.TabIndex = 0
-		Me.RichTextBox1.TabStop = False
+		Me.RichTextBox1.TabStop = false
 		Me.RichTextBox1.Text = ""
-		Me.RichTextBox1.WordWrap = False
+		Me.RichTextBox1.WordWrap = false
 		'
 		'ImageList1
 		'
-		Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+		Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"),System.Windows.Forms.ImageListStreamer)
 		Me.ImageList1.TransparentColor = System.Drawing.Color.White
 		Me.ImageList1.Images.SetKeyName(0, "class.bmp")
 		Me.ImageList1.Images.SetKeyName(1, "event.bmp")
@@ -83,7 +83,7 @@ Partial Class CodeEdit
 		'
 		'LineLabel
 		'
-		Me.LineLabel.AutoSize = False
+		Me.LineLabel.AutoSize = false
 		Me.LineLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
 		Me.LineLabel.Name = "LineLabel"
 		Me.LineLabel.Size = New System.Drawing.Size(100, 21)
@@ -91,7 +91,7 @@ Partial Class CodeEdit
 		'
 		'RowLabel
 		'
-		Me.RowLabel.AutoSize = False
+		Me.RowLabel.AutoSize = false
 		Me.RowLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
 		Me.RowLabel.Name = "RowLabel"
 		Me.RowLabel.Size = New System.Drawing.Size(100, 21)
@@ -102,13 +102,13 @@ Partial Class CodeEdit
 		Me.SelectLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
 		Me.SelectLabel.Name = "SelectLabel"
 		Me.SelectLabel.Size = New System.Drawing.Size(384, 21)
-		Me.SelectLabel.Spring = True
+		Me.SelectLabel.Spring = true
 		Me.SelectLabel.Text = "Selection length: 0"
 		'
 		'SaveCode
 		'
 		Me.SaveCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-		Me.SaveCode.Image = CType(resources.GetObject("SaveCode.Image"), System.Drawing.Image)
+		Me.SaveCode.Image = CType(resources.GetObject("SaveCode.Image"),System.Drawing.Image)
 		Me.SaveCode.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.SaveCode.Name = "SaveCode"
 		Me.SaveCode.Size = New System.Drawing.Size(81, 24)
@@ -117,7 +117,7 @@ Partial Class CodeEdit
 		'RebuildData
 		'
 		Me.RebuildData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-		Me.RebuildData.Image = CType(resources.GetObject("RebuildData.Image"), System.Drawing.Image)
+		Me.RebuildData.Image = CType(resources.GetObject("RebuildData.Image"),System.Drawing.Image)
 		Me.RebuildData.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.RebuildData.Name = "RebuildData"
 		Me.RebuildData.Size = New System.Drawing.Size(162, 24)
@@ -125,9 +125,9 @@ Partial Class CodeEdit
 		'
 		'Label1
 		'
-		Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 		Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.Label1.Font = New System.Drawing.Font("微软雅黑", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+		Me.Label1.Font = New System.Drawing.Font("微软雅黑", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
 		Me.Label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
 		Me.Label1.Location = New System.Drawing.Point(727, 12)
 		Me.Label1.Name = "Label1"
@@ -137,17 +137,17 @@ Partial Class CodeEdit
 		'
 		'ListBox1
 		'
-		Me.ListBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.ListBox1.Font = New System.Drawing.Font("微软雅黑", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-		Me.ListBox1.FormattingEnabled = True
-		Me.ListBox1.IntegralHeight = False
+		Me.ListBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+		Me.ListBox1.Font = New System.Drawing.Font("微软雅黑", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
+		Me.ListBox1.FormattingEnabled = true
+		Me.ListBox1.IntegralHeight = false
 		Me.ListBox1.ItemHeight = 17
 		Me.ListBox1.Location = New System.Drawing.Point(727, 35)
 		Me.ListBox1.Name = "ListBox1"
 		Me.ListBox1.Size = New System.Drawing.Size(134, 573)
 		Me.ListBox1.TabIndex = 6
-		Me.ListBox1.TabStop = False
+		Me.ListBox1.TabStop = false
 		'
 		'ToolTip
 		'

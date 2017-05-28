@@ -4,8 +4,11 @@ Public Class FormMain
 	Dim man As Manager
 	Dim page As New Blank
 	Dim sav As CodeGenerater
+	Dim ctrl As New ControlCreater
 
 	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+		Settings.Initialize
+
 		man = New Manager(page, PropertyGrid1, TextBox1)
 
 		page.MdiParent = Me
@@ -14,7 +17,7 @@ Public Class FormMain
 
 	Private Sub TreeView1_NodeMouseDoubleClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles TreeView1.NodeMouseDoubleClick
 		Try
-			Dim c As Control = AddControlHelper.CreatControlToContainer(e.Node.Text, page)
+			Dim c As Control = ctrl.CreatControlToContainer(e.Node.Text, page)
 			man.AddControl(c)
 		Catch ex As Exception
 			MsgBox("Error in creating control!")
@@ -24,23 +27,8 @@ Public Class FormMain
 	Private Sub TestRunToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestRunToolStripMenuItem.Click
 		Status.Text = "Compiling..."
 		Progress.Style = ProgressBarStyle.Marquee
-		Dim cr = New CodeRunner(New CodeGenerater(man).Compile, man.DesignerForm.Text, man)
-		cr.Compile("\temp.exe")
-		Progress.Style = ProgressBarStyle.Blocks
-
-		DialogError.ListBox1.Items.Clear()
-
-		If cr.Errors.Count <> 0 Then
-			For Each er As CodeDom.Compiler.CompilerError In cr.Errors
-				DialogError.ListBox1.Items.Add(
-					"Error " & er.ErrorNumber & ": " & vbCrLf & er.ErrorText)
-			Next
-			DialogError.ShowDialog()
-		Else
-			Status.Text = "Compiled, running..."
-			Shell("\temp.exe")
-		End If
-		Status.Text = "Ready"
+		
+		compileTo("\temp.exe")
 	End Sub
 
 	Private Sub BuildExecutableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BuildExecutableToolStripMenuItem.Click
@@ -49,21 +37,42 @@ Public Class FormMain
 
 		Status.Text = "Compiling..."
 		Progress.Style = ProgressBarStyle.Marquee
-		Dim cr = New CodeRunner(New CodeGenerater(man).Compile, man.DesignerForm.Text, man)
-		cr.Compile(SaveFileDialog1.FileName)
-		Progress.Style = ProgressBarStyle.Blocks
 
+		compileTo(SaveFileDialog1.FileName)
+	End Sub
+
+	Private Sub compileTo(path As String)
+		Dim code As String = New CodeGenerater(man).Compile
+		Dim cr = New CodeRunner(code, man.DesignerForm.Text, man)
+		cr.Compile(path)
+		Progress.Style = ProgressBarStyle.Blocks
+		
 		DialogError.ListBox1.Items.Clear()
 
 		If cr.Errors.Count <> 0 Then
+			Dim genLines As Integer = 
+				code.Split(vbCrLf).Length - man.UserCode.Split(vbCrLf).Length - 1
+
+			My.Forms.CodeEdit.Highlighter.ErrorLines.Clear
+
 			For Each er As CodeDom.Compiler.CompilerError In cr.Errors
-				DialogError.ListBox1.Items.Add(
-					"Error " & er.ErrorNumber & ": " & vbCrLf & er.ErrorText)
+				If er.IsWarning Then
+					DialogError.ListBox1.Items.Add(
+						"Warning " & er.ErrorNumber & " at line " & er.Line - genLines & 
+						": " & vbCrLf & er.ErrorText)
+				Else
+					DialogError.ListBox1.Items.Add(
+						"Error " & er.ErrorNumber & " at line " & er.Line - genLines & 
+						": " & vbCrLf & er.ErrorText)
+
+					My.Forms.CodeEdit.Highlighter.ErrorLines.Add(er.Line - genLines - 1)
+				End If
 			Next
+
 			DialogError.ShowDialog()
 		Else
 			Status.Text = "Compiled, running..."
-			Shell(SaveFileDialog1.FileName)
+			Shell(path)
 		End If
 		Status.Text = "Ready"
 	End Sub

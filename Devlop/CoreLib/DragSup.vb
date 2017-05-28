@@ -1,5 +1,5 @@
 ﻿Namespace Core
-	Public Class DragSup
+	Public Class DragSupporter
 		WithEvents _ctrl As Control
 		Dim _enabled As Boolean, dx, dy As Single
 

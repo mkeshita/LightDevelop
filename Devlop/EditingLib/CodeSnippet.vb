@@ -41,16 +41,16 @@ Namespace Editing
 
 		Private Sub ListClick(sender As Object, e As EventArgs) Handles SnippetList.DoubleClick
 			If SnippetList.SelectedIndices.Count = 1 Then
-				Dim line As Integer = EditTextBox.GetLineFromCharIndex(EditTextBox.SelectionStart)
-				Dim oldSelectionStart = EditTextBox.SelectionStart
+				Dim line As Integer = TextBox.GetLineFromCharIndex(TextBox.SelectionStart)
+				Dim oldSelectionStart = TextBox.SelectionStart
 				If line = -1 Then Exit Sub
-				Dim spaces As Integer = EditTextBox.Lines(line).Length - LTrim(EditTextBox.Lines(line)).Length
+				Dim spaces As Integer = TextBox.Lines(line).Length - LTrim(TextBox.Lines(line)).Length
 
 				Dim snip As String = snippets(SnippetList.SelectedItem).Replace("\n", vbCrLf & StrDup(spaces, " "))
-				EditTextBox.Text =
-				EditTextBox.Text.Insert(oldSelectionStart, snip)
+				TextBox.Text =
+				TextBox.Text.Insert(oldSelectionStart, snip)
 
-				EditTextBox.SelectionStart = oldSelectionStart
+				TextBox.SelectionStart = oldSelectionStart
 			End If
 		End Sub
 	End Class

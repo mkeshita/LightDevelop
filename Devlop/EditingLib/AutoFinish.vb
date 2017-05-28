@@ -1,4 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
+
 Namespace Editing
 	Public Class AutoFinishSup
 		Inherits EditingSupporter
@@ -21,22 +22,22 @@ Namespace Editing
 			reslover.BuildList()
 		End Sub
 
-		Private Sub EditTextbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles EditTextBox.KeyPress
+		Private Sub EditTextbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBox.KeyPress
 			If Not Settings.EnableAutoFinish Then Exit Sub
 
 			If e.KeyChar = "." Then
 				' if there's nothing to finish then exit
-				If GetLastWord(EditTextBox.Text, EditTextBox.SelectionStart) = "" Then
+				If getLastWord(TextBox.Text, TextBox.SelectionStart) = "" Then
 					Exit Sub
 				End If
 				' if it's already here then delete it
 				If cuebox IsNot Nothing Then
-					DeleteBox()
+					deleteBox()
 					Exit Sub
 				End If
 
-				cuebox = CreateCueBox(EditTextBox.GetPositionFromCharIndex(EditTextBox.SelectionStart))
-				textcue = CreateLabel(cuebox.Location)
+				cuebox = createBox(TextBox.GetPositionFromCharIndex(TextBox.SelectionStart))
+				textcue = createLabel(cuebox.Location)
 				textcue.Left += cuebox.Width + 10
 
 				AddHandler cuebox.KeyPress, AddressOf ListBox_KeyPress
@@ -45,7 +46,7 @@ Namespace Editing
 				AddHandler cuebox.SelectedIndexChanged,
 												AddressOf ListBox_SelectionChange
 
-				Dim name As String = GetName(EditTextBox, e.KeyChar)
+				Dim name As String = getName(TextBox, e.KeyChar)
 				Dim member As TypeResolver.SpaceMember = reslover.ResolveType(name)
 				If member IsNot Nothing Then
 					' this is a class! add all class member into this box
@@ -94,7 +95,7 @@ Namespace Editing
 
 					If types Is Nothing Then
 						' if not, everything is over
-						DeleteBox()
+						deleteBox()
 						Exit Sub
 					End If
 
@@ -119,37 +120,29 @@ Namespace Editing
 					cuebox.Focus()
 				End If
 			Else
-				If cuebox IsNot Nothing Then DeleteBox()
+				If cuebox IsNot Nothing Then deleteBox()
 			End If
 
 		End Sub
-
-		'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+		
+		#Region "Cuebox Event handlers"
 
 		Private Sub ListBox_KeyPress(sender As Object, e As KeyPressEventArgs)
 			Dim lb = CType(sender, ListView)
 			If e.KeyChar = " " Then
-				If lb.SelectedItems.Count = 0 Then Exit Sub
-				Dim oldSS = EditTextBox.SelectionStart
-				EditTextBox.Text = EditTextBox.Text.Insert(EditTextBox.SelectionStart, lb.SelectedItems(0).Text)
-				EditTextBox.SelectionStart = oldSS + lb.SelectedItems(0).Text.Length
-				DeleteBox()
+				accept(lb)
 			ElseIf e.KeyChar = vbBack Then
-				DeleteBox()
+				deleteBox()
 			End If
 		End Sub
 
 		Private Sub ListBox_DoubleClick(sender As Object, e As EventArgs)
 			Dim lb = CType(sender, ListView)
-			If lb.SelectedItems.Count = 0 Then Exit Sub
-			Dim oldSS = EditTextBox.SelectionStart
-			EditTextBox.Text = EditTextBox.Text.Insert(EditTextBox.SelectionStart, lb.SelectedItems(0).Text)
-			EditTextBox.SelectionStart = oldSS + lb.SelectedItems(0).Text.Length
-			DeleteBox()
+			accept(lb)
 		End Sub
 
 		Private Sub ListBox_LostFocus(sender As Object, e As EventArgs)
-			DeleteBox()
+			deleteBox()
 		End Sub
 
 		Private Sub ListBox_SelectionChange(sender As Object, e As EventArgs)
@@ -213,9 +206,19 @@ Namespace Editing
 			End Try
 		End Sub
 
-		'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+		#End Region
 
-		Private Sub DeleteBox()
+		#Region "Private helpers"
+
+		Private Sub accept(lb As ListView)
+			If lb.SelectedItems.Count = 0 Then Exit Sub
+			Dim oldSS = TextBox.SelectionStart
+			TextBox.Text = TextBox.Text.Insert(TextBox.SelectionStart, lb.SelectedItems(0).Text)
+			TextBox.SelectionStart = oldSS + lb.SelectedItems(0).Text.Length
+			deleteBox()
+		End Sub
+
+		Private Sub deleteBox()
 			If textcue IsNot Nothing Then textcue.Dispose()
 			textcue = Nothing
 
@@ -223,7 +226,7 @@ Namespace Editing
 			cuebox = Nothing
 		End Sub
 
-		Private Function CreateCueBox(loca As Point) As ListView
+		Private Function createBox(loca As Point) As ListView
 			Dim cue As New ListView()
 			cue.Name = "keywdCue"
 			cue.SmallImageList = Images
@@ -232,33 +235,33 @@ Namespace Editing
 			cue.TabStop = False
 			cue.TabIndex = 100
 			cue.Size = New Size(200, 400)
-			cue.Location = EditTextBox.GetPositionFromCharIndex(EditTextBox.SelectionStart)
+			cue.Location = TextBox.GetPositionFromCharIndex(TextBox.SelectionStart)
 			cue.Left += 10
 			cue.Top += 20
-			EditTextBox.Controls.Add(cue)
+			TextBox.Controls.Add(cue)
 
 			Return cue
 		End Function
 
-		Private Function CreateLabel(loca As Point) As Label
+		Private Function createLabel(loca As Point) As Label
 			Dim text As New Label()
 
-			EditTextBox.Controls.Add(text)
+			TextBox.Controls.Add(text)
 			text.Text = "Test"
 			text.Font = TextFont
 			text.Location = loca
 			text.BorderStyle = BorderStyle.FixedSingle
 			text.BackColor = Color.LightYellow
 			text.AutoSize = True
-			text.MaximumSize = New Size(EditTextBox.Width - text.Left,
-										EditTextBox.Height - text.Height)
+			text.MaximumSize = New Size(TextBox.Width - text.Left,
+										TextBox.Height - text.Height)
 
 			Return text
 		End Function
 
 		Private sepr As Char() = {"+", "-", "*", "/", " ", "(", ")", "{", "}", ",", "&", "^", "="}
 
-		Public Function GetName(rt As RichTextBox, editChar As Char) As String
+		Private Function getName(rt As RichTextBox, editChar As Char) As String
 			Dim reftxt As String
 			reftxt = rt.Lines(rt.GetLineFromCharIndex(rt.SelectionStart)) & editChar
 			Dim pos = reftxt.LastIndexOf(".")
@@ -272,7 +275,7 @@ Namespace Editing
 			Return reftxt
 		End Function
 
-		Public Function GetLastWord(s As String, i As Integer) As String
+		Private Function getLastWord(s As String, i As Integer) As String
 			' Get the last word.
 			Dim x = Left(s, i)
 			x = Regex.Match(x, "\s*[a-zA-Z]+\s*", RegexOptions.RightToLeft).Value
@@ -282,5 +285,8 @@ Namespace Editing
 
 			Return x
 		End Function
+
+		#End Region
+
 	End Class
 End Namespace

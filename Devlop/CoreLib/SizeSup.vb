@@ -1,14 +1,14 @@
 ﻿Namespace Core
-	Public Class SizeSup
+	Public Class SizeSupporter
 		WithEvents _ctrl, _sizer As Control
-		Dim _enabled As Boolean, _ds As DragSup, ox, oy As Integer
+		Dim _enabled As Boolean, _ds As DragSupporter, ox, oy As Integer
 
 		Public Sub New(ctrlMain As Control, ctrlSizer As Control, Optional ena As Boolean = True)
 			_ctrl = ctrlMain
 			_sizer = ctrlSizer
 			_enabled = ena
 
-			_ds = New DragSup(_sizer)
+			_ds = New DragSupporter(_sizer)
 		End Sub
 
 		Private Sub _sizer_MouseDown(sender As Object, e As MouseEventArgs) Handles _sizer.MouseDown

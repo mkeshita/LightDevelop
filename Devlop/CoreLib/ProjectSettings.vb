@@ -1,4 +1,6 @@
-﻿Public Class ProjectSettings
+﻿Imports Develop.Core
+
+Public Class ProjectSettings
     Dim _m As Manager
 
     Public Sub New(man As Manager)
