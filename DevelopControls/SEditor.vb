@@ -1,9 +1,16 @@
-﻿Public Class UserControl1
+﻿Public Class SEditor
 
-#Region "    Properties&Varibles"
-
+#Region "    Properties & Varibles"
 	Public Property Lines As List(Of String) = New List(Of String)({""})
 	Public Property BlinkCursor As Boolean = True
+	Public Property LineNumber As Boolean = True
+	Public Property TextRenderMethod As Drawing.Text.TextRenderingHint = 
+		Drawing.Text.TextRenderingHint.ClearTypeGridFit
+	Public Property LineNumberColor As Color = Color.DarkCyan
+	Public Property SeperatorColor As Color = Color.DarkBlue
+	Public Property SeperatorWidth As Single = 2
+	Public Property Antialiasing As Boolean = True
+
 	Public ReadOnly Property SelectionStart As Point
 		Get
 			Return sStart
@@ -86,8 +93,7 @@
 			selectionBrush.Color = Color.FromArgb(Value, selectionBrush.Color)
 		End Set
 	End Property
-
-
+	
 	Private selecting As Boolean = False
 	Private sStart As Point = New Point(0, 0)
 	Private sEnd As Point = New Point(0, 0)
@@ -107,28 +113,59 @@
 		SetupBuffer()
 		charSize = buffer.Graphics.MeasureString("M", Font, 1000, StringFormat.GenericTypographic)
 	End Sub
-
 #End Region
 
 #Region "    Rendering"
-
-
 	Private Sub Draw(sender As Object, e As EventArgs) Handles Timer.Tick
 		If Not isDone Then Exit Sub
 
 		isDone = False
 		frames += 1
 		If frames > 50 Then frames = 0
+
+		Dim bkBrush As New SolidBrush(Me.BackColor)
+		Dim lineBrush As New SolidBrush(LineNumberColor)
+		Dim sepPen As New Pen(SeperatorColor, SeperatorWidth)
+
 		With buffer.Graphics
-			.Clear(Color.White)
+			.TextRenderingHint = TextRenderMethod
+			If Antialiasing Then
+				.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+			Else
+				.SmoothingMode = Drawing2D.SmoothingMode.HighSpeed
+			End If
+
+			.Clear(Me.BackColor)
 			.ResetTransform()
-			transform = New PointF(0, -VScrollBar.Value * charSize.Height)
+
+			'If cCol * charSize.Width + transform.X < 0 Then HScrollBar.Value -= 1
+			'If cCol * charSize.Width + transform.X > Me.Width Then HScrollBar.Value += 1
+			'If cLine * charSize.Height + transform.Y < 0 Then VScrollBar.Value -= 1
+			'If cLine * charSize.Height + transform.Y > Me.Width Then VScrollBar.Value += 1
+
+			transform = New PointF(-HScrollBar.Value * charSize.Width, 
+									-VScrollBar.Value * charSize.Height)
+			If LineNumber Then transform.X += 55
 			.TranslateTransform(transform.X, transform.Y)
+
+			' render text
 			Dim y As Single = 0
 			For Each line In Lines
 				.DrawString(line, Font, Brushes.Black, 0, y, StringFormat.GenericTypographic)
 				y += charSize.Height
 			Next
+
+			If LineNumber
+				.FillRectangle(bkBrush, -5, 0, 0, Lines.Count * charSize.Height)
+				.DrawLine(sepPen, -5, 0, -5, Lines.Count * charSize.Height)
+
+				Dim n As Integer = 1 : y = 0
+				For Each line In Lines
+					.DrawString(n, Font, lineBrush, -50, y, StringFormat.GenericTypographic)
+					y += charSize.Height
+					n += 1
+				Next
+			End If
 
 			' selection
 			If selecting Then
@@ -166,7 +203,7 @@
 	End Sub
 
 	Private Sub SetupScrollBars()
-		' setup scrollbar
+		' v-scrollbar
 		If Lines.Count * charSize.Height < Me.Height Then
 			VScrollBar.Enabled = False
 			VScrollBar.Value = 0
@@ -174,15 +211,25 @@
 			VScrollBar.Enabled = True
 			VScrollBar.Maximum = Lines.Count
 		End If
+
+		Dim longLen As Integer = Lines.Max(Function(x) x.Length)
+		If longLen * charSize.Width < Me.Width Then
+			HScrollBar.Enabled = False
+			HScrollBar.Value = 0
+		Else
+			HScrollBar.Enabled = True
+			HScrollBar.Maximum = longLen
+		End If
 	End Sub
 
 	Private Sub SetupBuffer()
 		isDone = False
 		Dim g = Me.CreateGraphics()
+
 		' calculate the client rect without sliders
 		Dim rect As Rectangle = Rectangle.Inflate(Me.ClientRectangle, -20, -20)
 		buffer = BufferedGraphicsManager.Current.Allocate(g, Me.ClientRectangle)
-		buffer.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.ClearTypeGridFit
+		
 		isDone = True
 	End Sub
 
@@ -192,7 +239,6 @@
 		Dim y As Single = line * charSize.Height
 		g.FillRectangle(selectionBrush, Math.Min(sx, ex), y, Math.Abs(ex - sx), charSize.Height)
 	End Sub
-
 #End Region
 
 #Region "    Input Processing"
@@ -210,10 +256,8 @@
 			Case Keys.Tab
 				Return False
 			Case Else
-				GoTo ExitDoor
+				Return MyBase.ProcessDialogKey(keyData)
 		End Select
-
-
 
 		frames = 0 ' disable cursor blinking
 		If cLine < 0 Then cLine = 0
@@ -223,12 +267,10 @@
 		If cCol < 0 Then cCol = 0
 		If cCol > l.Length Then cCol = l.Length
 
-ExitDoor:
-		Return MyBase.ProcessDialogKey(keyData)
+		Return False
 	End Function
 
 	Private Sub UserControl_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
-
 		Select Case e.KeyChar
 			Case vbBack
 				If selecting Then
@@ -329,7 +371,6 @@ ExitDoor:
 #End Region
 
 #Region "    Event Processing"
-
 	Private Sub UserControl_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 		SetupBuffer()
 	End Sub
@@ -344,15 +385,15 @@ ExitDoor:
 			cCol = p.X
 			cLine = p.Y
 			sStart = p
+
 		ElseIf e.Button = MouseButtons.Right Then
 			mDown = True
 			frames = 0
-			selecting = False
 
-			Dim p As Point = ParseMouseToChar(e)
-			cCol = p.X
-			cLine = p.Y
-			sStart = p
+			'Dim p As Point = ParseMouseToChar(e)
+			'cCol = p.X
+			'cLine = p.Y
+			'sStart = p
 
 			If Not selecting Then
 				CopyMenu.Enabled = False
@@ -398,7 +439,7 @@ ExitDoor:
 
 	Private Sub UserControl1_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
 		Dim v As Integer = VScrollBar.Value - Int(e.Delta / 40)
-		If v <= VScrollBar.Maximum AndAlso v >= 0 Then VScrollBar.Value = v
+		VScrollBar.Value = Math.Min(Math.Max(v,0),VScrollBar.Maximum)
 	End Sub
 
 	Private Sub PasteMenu_Click(sender As Object, e As EventArgs) Handles PasteMenu.Click

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class UserControl1
+Partial Class SEditor
 	Inherits System.Windows.Forms.UserControl
 
 	'UserControl1 重写 Dispose，以清理组件列表。
@@ -33,12 +33,12 @@ Partial Class UserControl1
 		Me.VScrollBar = New System.Windows.Forms.VScrollBar()
 		Me.HScrollBar = New System.Windows.Forms.HScrollBar()
 		Me.Label1 = New System.Windows.Forms.Label()
-		Me.Menu.SuspendLayout()
-		Me.SuspendLayout()
+		Me.Menu.SuspendLayout
+		Me.SuspendLayout
 		'
 		'Timer
 		'
-		Me.Timer.Enabled = True
+		Me.Timer.Enabled = true
 		Me.Timer.Interval = 15
 		'
 		'Menu
@@ -51,21 +51,21 @@ Partial Class UserControl1
 		'CopyMenu
 		'
 		Me.CopyMenu.Name = "CopyMenu"
-		Me.CopyMenu.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
+		Me.CopyMenu.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C),System.Windows.Forms.Keys)
 		Me.CopyMenu.Size = New System.Drawing.Size(173, 22)
 		Me.CopyMenu.Text = "Copy"
 		'
 		'CutMenu
 		'
 		Me.CutMenu.Name = "CutMenu"
-		Me.CutMenu.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
+		Me.CutMenu.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X),System.Windows.Forms.Keys)
 		Me.CutMenu.Size = New System.Drawing.Size(173, 22)
 		Me.CutMenu.Text = "Cut"
 		'
 		'PasteMenu
 		'
 		Me.PasteMenu.Name = "PasteMenu"
-		Me.PasteMenu.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
+		Me.PasteMenu.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V),System.Windows.Forms.Keys)
 		Me.PasteMenu.Size = New System.Drawing.Size(173, 22)
 		Me.PasteMenu.Text = "Paste"
 		'
@@ -77,45 +77,46 @@ Partial Class UserControl1
 		'SelectAllMenu
 		'
 		Me.SelectAllMenu.Name = "SelectAllMenu"
-		Me.SelectAllMenu.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+		Me.SelectAllMenu.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A),System.Windows.Forms.Keys)
 		Me.SelectAllMenu.Size = New System.Drawing.Size(173, 22)
 		Me.SelectAllMenu.Text = "Select All"
 		'
 		'VScrollBar
 		'
-		Me.VScrollBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.VScrollBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 		Me.VScrollBar.Cursor = System.Windows.Forms.Cursors.Arrow
-		Me.VScrollBar.Location = New System.Drawing.Point(714, 0)
+		Me.VScrollBar.Location = New System.Drawing.Point(580, 0)
 		Me.VScrollBar.Maximum = 10
 		Me.VScrollBar.Name = "VScrollBar"
-		Me.VScrollBar.Size = New System.Drawing.Size(20, 640)
+		Me.VScrollBar.Size = New System.Drawing.Size(20, 480)
 		Me.VScrollBar.TabIndex = 1
 		'
 		'HScrollBar
 		'
-		Me.HScrollBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.HScrollBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 		Me.HScrollBar.Cursor = System.Windows.Forms.Cursors.Arrow
-		Me.HScrollBar.Location = New System.Drawing.Point(0, 640)
-		Me.HScrollBar.Maximum = 10
+		Me.HScrollBar.LargeChange = 25
+		Me.HScrollBar.Location = New System.Drawing.Point(0, 480)
+		Me.HScrollBar.Maximum = 30
 		Me.HScrollBar.Name = "HScrollBar"
-		Me.HScrollBar.Size = New System.Drawing.Size(714, 20)
+		Me.HScrollBar.Size = New System.Drawing.Size(580, 20)
 		Me.HScrollBar.TabIndex = 2
 		'
 		'Label1
 		'
-		Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 		Me.Label1.BackColor = System.Drawing.SystemColors.Control
 		Me.Label1.Cursor = System.Windows.Forms.Cursors.Arrow
-		Me.Label1.Location = New System.Drawing.Point(713, 639)
+		Me.Label1.Location = New System.Drawing.Point(579, 479)
 		Me.Label1.Name = "Label1"
 		Me.Label1.Size = New System.Drawing.Size(22, 22)
 		Me.Label1.TabIndex = 3
 		'
-		'UserControl1
+		'Editor
 		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 12!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.BackColor = System.Drawing.Color.White
 		Me.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -123,12 +124,12 @@ Partial Class UserControl1
 		Me.Controls.Add(Me.HScrollBar)
 		Me.Controls.Add(Me.VScrollBar)
 		Me.Cursor = System.Windows.Forms.Cursors.IBeam
-		Me.Name = "UserControl1"
-		Me.Size = New System.Drawing.Size(734, 660)
-		Me.Menu.ResumeLayout(False)
-		Me.ResumeLayout(False)
+		Me.Name = "Editor"
+		Me.Size = New System.Drawing.Size(600, 500)
+		Me.Menu.ResumeLayout(false)
+		Me.ResumeLayout(false)
 
-	End Sub
+End Sub
 
 	Friend WithEvents Timer As Timer
 	Friend WithEvents Menu As ContextMenuStrip
