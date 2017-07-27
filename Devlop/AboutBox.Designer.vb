@@ -34,15 +34,15 @@ Partial Class AboutBox
 		Me.OKButton = New System.Windows.Forms.Button()
 		Me.TextBox1 = New System.Windows.Forms.TextBox()
 		Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-		Me.TableLayoutPanel.SuspendLayout()
-		Me.SuspendLayout()
+		Me.TableLayoutPanel.SuspendLayout
+		Me.SuspendLayout
 		'
 		'TableLayoutPanel
 		'
 		Me.TableLayoutPanel.BackColor = System.Drawing.Color.Transparent
 		Me.TableLayoutPanel.ColumnCount = 2
-		Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 310.0!))
+		Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
+		Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 310!))
 		Me.TableLayoutPanel.Controls.Add(Me.LabelProductName, 0, 0)
 		Me.TableLayoutPanel.Controls.Add(Me.LabelVersion, 0, 1)
 		Me.TableLayoutPanel.Controls.Add(Me.OKButton, 1, 4)
@@ -57,7 +57,7 @@ Partial Class AboutBox
 		Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.79798!))
 		Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.54545!))
 		Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.10101!))
-		Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+		Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10!))
 		Me.TableLayoutPanel.Size = New System.Drawing.Size(624, 537)
 		Me.TableLayoutPanel.TabIndex = 0
 		'
@@ -66,7 +66,7 @@ Partial Class AboutBox
 		Me.LabelProductName.BackColor = System.Drawing.Color.DarkCyan
 		Me.TableLayoutPanel.SetColumnSpan(Me.LabelProductName, 2)
 		Me.LabelProductName.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.LabelProductName.Font = New System.Drawing.Font("微软雅黑", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+		Me.LabelProductName.Font = New System.Drawing.Font("微软雅黑", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
 		Me.LabelProductName.ForeColor = System.Drawing.Color.Black
 		Me.LabelProductName.Location = New System.Drawing.Point(0, 0)
 		Me.LabelProductName.Margin = New System.Windows.Forms.Padding(0)
@@ -81,7 +81,7 @@ Partial Class AboutBox
 		'
 		Me.LabelVersion.BackColor = System.Drawing.Color.CadetBlue
 		Me.LabelVersion.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.LabelVersion.Font = New System.Drawing.Font("微软雅黑", 10.5!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+		Me.LabelVersion.Font = New System.Drawing.Font("微软雅黑", 10.5!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
 		Me.LabelVersion.ForeColor = System.Drawing.Color.Black
 		Me.LabelVersion.Location = New System.Drawing.Point(0, 136)
 		Me.LabelVersion.Margin = New System.Windows.Forms.Padding(0)
@@ -89,7 +89,7 @@ Partial Class AboutBox
 		Me.LabelVersion.Name = "LabelVersion"
 		Me.LabelVersion.Size = New System.Drawing.Size(314, 214)
 		Me.LabelVersion.TabIndex = 0
-		Me.LabelVersion.Text = "Build 1"
+		Me.LabelVersion.Text = "Build 1.6beta"
 		Me.LabelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'OKButton
@@ -101,7 +101,7 @@ Partial Class AboutBox
 		Me.OKButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
 		Me.OKButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkCyan
 		Me.OKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.OKButton.Font = New System.Drawing.Font("微软雅黑", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+		Me.OKButton.Font = New System.Drawing.Font("微软雅黑", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
 		Me.OKButton.ForeColor = System.Drawing.Color.Black
 		Me.OKButton.Location = New System.Drawing.Point(546, 485)
 		Me.OKButton.MaximumSize = New System.Drawing.Size(80, 100)
@@ -109,7 +109,7 @@ Partial Class AboutBox
 		Me.OKButton.Size = New System.Drawing.Size(75, 49)
 		Me.OKButton.TabIndex = 0
 		Me.OKButton.Text = "Okay"
-		Me.OKButton.UseVisualStyleBackColor = False
+		Me.OKButton.UseVisualStyleBackColor = false
 		'
 		'TextBox1
 		'
@@ -120,7 +120,7 @@ Partial Class AboutBox
 		Me.TextBox1.ForeColor = System.Drawing.Color.WhiteSmoke
 		Me.TextBox1.Location = New System.Drawing.Point(315, 136)
 		Me.TextBox1.Margin = New System.Windows.Forms.Padding(1, 0, 0, 0)
-		Me.TextBox1.Multiline = True
+		Me.TextBox1.Multiline = true
 		Me.TextBox1.Name = "TextBox1"
 		Me.TextBox1.RightToLeft = System.Windows.Forms.RightToLeft.No
 		Me.TableLayoutPanel.SetRowSpan(Me.TextBox1, 3)
@@ -131,10 +131,10 @@ Partial Class AboutBox
 		'LinkLabel1
 		'
 		Me.LinkLabel1.ActiveLinkColor = System.Drawing.Color.DarkSlateGray
-		Me.LinkLabel1.AutoSize = True
+		Me.LinkLabel1.AutoSize = true
 		Me.LinkLabel1.BackColor = System.Drawing.Color.DarkCyan
 		Me.LinkLabel1.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.LinkLabel1.Font = New System.Drawing.Font("微软雅黑", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+		Me.LinkLabel1.Font = New System.Drawing.Font("微软雅黑", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
 		Me.LinkLabel1.LinkArea = New System.Windows.Forms.LinkArea(0, 40)
 		Me.LinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline
 		Me.LinkLabel1.LinkColor = System.Drawing.Color.SkyBlue
@@ -144,34 +144,34 @@ Partial Class AboutBox
 		Me.TableLayoutPanel.SetRowSpan(Me.LinkLabel1, 2)
 		Me.LinkLabel1.Size = New System.Drawing.Size(314, 132)
 		Me.LinkLabel1.TabIndex = 2
-		Me.LinkLabel1.TabStop = True
-		Me.LinkLabel1.Text = "https://github.com/Knowif/LightDevelop" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Visit the project on GitHub!"
+		Me.LinkLabel1.TabStop = true
+		Me.LinkLabel1.Text = "https://github.com/Knowif/LightDevelop"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Visit the project on GitHub!"
 		Me.LinkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		Me.LinkLabel1.UseCompatibleTextRendering = True
+		Me.LinkLabel1.UseCompatibleTextRendering = true
 		Me.LinkLabel1.VisitedLinkColor = System.Drawing.Color.LightSteelBlue
 		'
 		'AboutBox
 		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 12!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.BackColor = System.Drawing.Color.CadetBlue
-		Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+		Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
 		Me.CancelButton = Me.OKButton
 		Me.ClientSize = New System.Drawing.Size(642, 553)
 		Me.Controls.Add(Me.TableLayoutPanel)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-		Me.MaximizeBox = False
-		Me.MinimizeBox = False
+		Me.MaximizeBox = false
+		Me.MinimizeBox = false
 		Me.Name = "AboutBox"
 		Me.Padding = New System.Windows.Forms.Padding(9, 8, 9, 8)
-		Me.ShowInTaskbar = False
+		Me.ShowInTaskbar = false
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.Text = "AboutBox"
-		Me.TableLayoutPanel.ResumeLayout(False)
-		Me.TableLayoutPanel.PerformLayout()
-		Me.ResumeLayout(False)
+		Me.TableLayoutPanel.ResumeLayout(false)
+		Me.TableLayoutPanel.PerformLayout
+		Me.ResumeLayout(false)
 
-	End Sub
+End Sub
 
 	Friend WithEvents TextBox1 As TextBox
 	Friend WithEvents LinkLabel1 As LinkLabel

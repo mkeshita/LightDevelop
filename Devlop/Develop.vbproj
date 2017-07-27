@@ -12,7 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>C:\Users\xx\Videos\Develop\</PublishUrl>
     <Install>true</Install>
@@ -80,7 +81,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -145,8 +146,6 @@
     </Compile>
     <Compile Include="EditingLib\RtbAutoFinish.vb" />
     <Compile Include="EditingLib\RtbCodeSnippet.vb" />
-    <Compile Include="EditingLib\RtbHighlight.vb" />
-    <Compile Include="EditingLib\RtbTabs.vb" />
     <Compile Include="EditingLib\TypeResolver.vb" />
     <Compile Include="Extension.vb" />
     <Compile Include="FormMain.vb">
@@ -264,6 +263,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TooltipLib\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevelopControls\DevelopControls.vbproj">
+      <Project>{c2654957-7c39-407c-864c-c7f6e84e60fb}</Project>
+      <Name>DevelopControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

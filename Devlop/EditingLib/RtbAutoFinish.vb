@@ -1,15 +1,16 @@
 ﻿Imports System.Text.RegularExpressions
+Imports DevelopControls
 Namespace Editing
-	Public Class AutoFinishSup
-		Inherits EditingSupporter
+	Public Class AutoFinish
 
 		Public Images As ImageList
 		Public TextFont As Font = Control.DefaultFont
+		Public WithEvents Editor As SEditor
 		Private cuebox As ListView = Nothing, textcue As Label = Nothing
 		Private reslover As New TypeResolver()
 
-		Public Sub New(box As RichTextBox, image As ImageList, imp As String())
-			MyBase.New(box)
+		Public Sub New(box As SEditor, image As ImageList, imp As String())
+			Editor = box
 			If image Is Nothing Then Throw New ArgumentNullException()
 			Images = image
 
@@ -21,21 +22,26 @@ Namespace Editing
 			reslover.BuildList()
 		End Sub
 
-		Private Sub EditTextbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles EditTextBox.KeyPress
+		Private Sub Editor_TextChanged(sender As Object, e As EventArgs) Handles Editor.TextChanged
 			If Not Settings.EnableAutoFinish Then Exit Sub
 
-			If e.KeyChar = "." Then
-				' if there's nothing to finish then exit
-				If GetLastWord(EditTextBox.Text, EditTextBox.SelectionStart) = "" Then
-					Exit Sub
-				End If
+			Dim keyChar As Char = Editor.CurrentPressedKeyChar
+
+			If keyChar = "." Then
+				' what if i skip this step?
+				'
+				'' if there's nothing to finish then exit
+				'If GetLastWord(Editor.AllText, Editor.SelectionStart) = "" Then
+				'	Exit Sub
+				'End If
+
 				' if it's already here then delete it
 				If cuebox IsNot Nothing Then
 					DeleteBox()
 					Exit Sub
 				End If
 
-				cuebox = CreateCueBox(EditTextBox.GetPositionFromCharIndex(EditTextBox.SelectionStart))
+				cuebox = CreateCueBox(Editor.CurrentPixelPosition)
 				textcue = CreateLabel(cuebox.Location)
 				textcue.Left += cuebox.Width + 10
 
@@ -45,13 +51,12 @@ Namespace Editing
 				AddHandler cuebox.SelectedIndexChanged,
 												AddressOf ListBox_SelectionChange
 
-				Dim name As String = GetName(EditTextBox, e.KeyChar)
+				Dim name As String = GetName()
 				Dim member As TypeResolver.SpaceMember = reslover.ResolveType(name)
 				If member IsNot Nothing Then
 					' this is a class! add all class member into this box
-
 					For Each mem In member.Type.GetMembers()
-						' if it's a repeat then skip
+						' if it's a duplicate then skip
 						If cuebox.Items.ContainsKey(mem.Name) Then Continue For
 
 						' icons switch
@@ -62,14 +67,15 @@ Namespace Editing
 							Case Reflection.MemberTypes.Event
 								num = 1
 							Case Reflection.MemberTypes.Field
-								If Not CType(mem, Reflection.FieldInfo).IsPublic Then Continue For
+								If CType(mem, Reflection.FieldInfo).IsPrivate Then Continue For
 								num = 2
 							Case Reflection.MemberTypes.Method
-								If Not CType(mem, Reflection.MethodInfo).IsPublic Then Continue For
+								If CType(mem, Reflection.MethodInfo).IsPrivate Then Continue For
 								num = 3
 							Case Reflection.MemberTypes.Property
 								num = 4
 							Case Reflection.MemberTypes.Constructor
+								If CType(mem, Reflection.ConstructorInfo).IsPrivate Then Continue For
 								num = 3
 						End Select
 
@@ -130,9 +136,7 @@ Namespace Editing
 			Dim lb = CType(sender, ListView)
 			If e.KeyChar = " " Then
 				If lb.SelectedItems.Count = 0 Then Exit Sub
-				Dim oldSS = EditTextBox.SelectionStart
-				EditTextBox.Text = EditTextBox.Text.Insert(EditTextBox.SelectionStart, lb.SelectedItems(0).Text)
-				EditTextBox.SelectionStart = oldSS + lb.SelectedItems(0).Text.Length
+				Editor.InsertSLStringAtCurrent(lb.SelectedItems(0).Text)
 				DeleteBox()
 			ElseIf e.KeyChar = vbBack Then
 				DeleteBox()
@@ -142,9 +146,7 @@ Namespace Editing
 		Private Sub ListBox_DoubleClick(sender As Object, e As EventArgs)
 			Dim lb = CType(sender, ListView)
 			If lb.SelectedItems.Count = 0 Then Exit Sub
-			Dim oldSS = EditTextBox.SelectionStart
-			EditTextBox.Text = EditTextBox.Text.Insert(EditTextBox.SelectionStart, lb.SelectedItems(0).Text)
-			EditTextBox.SelectionStart = oldSS + lb.SelectedItems(0).Text.Length
+			Editor.InsertSLStringAtCurrent(lb.SelectedItems(0).Text)
 			DeleteBox()
 		End Sub
 
@@ -232,10 +234,10 @@ Namespace Editing
 			cue.TabStop = False
 			cue.TabIndex = 100
 			cue.Size = New Size(200, 400)
-			cue.Location = EditTextBox.GetPositionFromCharIndex(EditTextBox.SelectionStart)
+			cue.Location = Editor.CurrentPixelPosition
 			cue.Left += 10
 			cue.Top += 20
-			EditTextBox.Controls.Add(cue)
+			Editor.Controls.Add(cue)
 
 			Return cue
 		End Function
@@ -243,33 +245,33 @@ Namespace Editing
 		Private Function CreateLabel(loca As Point) As Label
 			Dim text As New Label()
 
-			EditTextBox.Controls.Add(text)
-			text.Text = "Test"
+			Editor.Controls.Add(text)
+			text.Text = ""
 			text.Font = TextFont
 			text.Location = loca
 			text.BorderStyle = BorderStyle.FixedSingle
 			text.BackColor = Color.LightYellow
 			text.AutoSize = True
-			text.MaximumSize = New Size(EditTextBox.Width - text.Left,
-										EditTextBox.Height - text.Height)
+			text.MaximumSize = New Size(Editor.Width - text.Left,
+										Editor.Height - text.Height)
 
 			Return text
 		End Function
 
 		Private sepr As Char() = {"+", "-", "*", "/", " ", "(", ")", "{", "}", ",", "&", "^", "="}
 
-		Public Function GetName(rt As RichTextBox, editChar As Char) As String
-			Dim reftxt As String
-			reftxt = rt.Lines(rt.GetLineFromCharIndex(rt.SelectionStart)) & editChar
-			Dim pos = reftxt.LastIndexOf(".")
-			If pos >= 0 Then reftxt = Left(reftxt, pos)
-			reftxt = Trim(reftxt)
+		Private Function GetName() As String
+			Dim line As String
+			line = Editor.Lines(Editor.CurrentCursor.Y)
+			Dim pos = line.LastIndexOf(".")
+			If pos >= 0 Then line = Left(line, pos)
+			line = Trim(line)
 
 			For Each sep In sepr
-				Dim npos = reftxt.LastIndexOf(sep)
-				If npos >= 0 Then reftxt = reftxt.Substring(npos + 1)
+				Dim npos = line.LastIndexOf(sep)
+				If npos >= 0 Then line = line.Substring(npos + 1)
 			Next
-			Return reftxt
+			Return line
 		End Function
 
 		Public Function GetLastWord(s As String, i As Integer) As String
