@@ -27,6 +27,7 @@ Public Class CodeEdit
 	Private Sub CodeEdit_Load(sender As Object, e As EventArgs) Handles Me.Load
 		opened = True
 		Me.DoubleBuffered = True
+		Editor.AllText = MManager.UserCode
 		Editor.ColorTable = New List(Of Color)(Keywords.ColorTable)
 		Editor.HighlightRules = 
 				New List(Of KeyValuePair(Of String, Integer))(Keywords.RuleTable)
