@@ -12,7 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>C:\Users\xx\Videos\Develop\</PublishUrl>
     <Install>true</Install>
@@ -80,7 +81,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -125,8 +126,8 @@
     <Compile Include="CodeEdit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CoreLib\ControlCreater.vb" />
-    <Compile Include="CoreLib\CodeRunner.vb" />
+    <Compile Include="CoreLib\AddCtrlHlp.vb" />
+    <Compile Include="CoreLib\CodeRun.vb" />
     <Compile Include="CoreLib\DialogError.Designer.vb">
       <DependentUpon>DialogError.vb</DependentUpon>
     </Compile>
@@ -143,10 +144,8 @@
     <Compile Include="EditingLib\LoadingDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditingLib\AutoFinish.vb" />
-    <Compile Include="EditingLib\CodeSnippet.vb" />
-    <Compile Include="EditingLib\Highlight.vb" />
-    <Compile Include="EditingLib\Tabs.vb" />
+    <Compile Include="EditingLib\RtbAutoFinish.vb" />
+    <Compile Include="EditingLib\RtbCodeSnippet.vb" />
     <Compile Include="EditingLib\TypeResolver.vb" />
     <Compile Include="Extension.vb" />
     <Compile Include="FormMain.vb">
@@ -164,7 +163,7 @@
     <Compile Include="CoreLib\ProjectSettings.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CoreLib\CodeGenerater.vb" />
+    <Compile Include="CoreLib\Saver.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -264,6 +263,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TooltipLib\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevelopControls\DevelopControls.vbproj">
+      <Project>{c2654957-7c39-407c-864c-c7f6e84e60fb}</Project>
+      <Name>DevelopControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

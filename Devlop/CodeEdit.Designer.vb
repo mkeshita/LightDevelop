@@ -24,39 +24,18 @@ Partial Class CodeEdit
     Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
 		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CodeEdit))
-		Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
 		Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
 		Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
 		Me.LineLabel = New System.Windows.Forms.ToolStripStatusLabel()
 		Me.RowLabel = New System.Windows.Forms.ToolStripStatusLabel()
-		Me.SelectLabel = New System.Windows.Forms.ToolStripStatusLabel()
 		Me.SaveCode = New System.Windows.Forms.ToolStripDropDownButton()
 		Me.RebuildData = New System.Windows.Forms.ToolStripDropDownButton()
 		Me.Label1 = New System.Windows.Forms.Label()
 		Me.ListBox1 = New System.Windows.Forms.ListBox()
 		Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
+		Me.Editor = New DevelopControls.SEditor()
 		Me.StatusStrip1.SuspendLayout
 		Me.SuspendLayout
-		'
-		'RichTextBox1
-		'
-		Me.RichTextBox1.AcceptsTab = true
-		Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-		Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.RichTextBox1.CausesValidation = false
-		Me.RichTextBox1.DetectUrls = false
-		Me.RichTextBox1.Font = New System.Drawing.Font("Consolas", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.RichTextBox1.HideSelection = false
-		Me.RichTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable
-		Me.RichTextBox1.Location = New System.Drawing.Point(12, 12)
-		Me.RichTextBox1.Name = "RichTextBox1"
-		Me.RichTextBox1.Size = New System.Drawing.Size(709, 596)
-		Me.RichTextBox1.TabIndex = 0
-		Me.RichTextBox1.TabStop = false
-		Me.RichTextBox1.Text = ""
-		Me.RichTextBox1.WordWrap = false
 		'
 		'ImageList1
 		'
@@ -74,10 +53,10 @@ Partial Class CodeEdit
 		'
 		'StatusStrip1
 		'
-		Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LineLabel, Me.RowLabel, Me.SelectLabel, Me.SaveCode, Me.RebuildData})
-		Me.StatusStrip1.Location = New System.Drawing.Point(0, 611)
+		Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LineLabel, Me.RowLabel, Me.SaveCode, Me.RebuildData})
+		Me.StatusStrip1.Location = New System.Drawing.Point(0, 460)
 		Me.StatusStrip1.Name = "StatusStrip1"
-		Me.StatusStrip1.Size = New System.Drawing.Size(873, 26)
+		Me.StatusStrip1.Size = New System.Drawing.Size(854, 26)
 		Me.StatusStrip1.TabIndex = 3
 		Me.StatusStrip1.Text = "StatusStrip1"
 		'
@@ -86,7 +65,8 @@ Partial Class CodeEdit
 		Me.LineLabel.AutoSize = false
 		Me.LineLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
 		Me.LineLabel.Name = "LineLabel"
-		Me.LineLabel.Size = New System.Drawing.Size(100, 21)
+		Me.LineLabel.Size = New System.Drawing.Size(298, 21)
+		Me.LineLabel.Spring = true
 		Me.LineLabel.Text = "Line: 0"
 		'
 		'RowLabel
@@ -94,16 +74,9 @@ Partial Class CodeEdit
 		Me.RowLabel.AutoSize = false
 		Me.RowLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
 		Me.RowLabel.Name = "RowLabel"
-		Me.RowLabel.Size = New System.Drawing.Size(100, 21)
+		Me.RowLabel.Size = New System.Drawing.Size(298, 21)
+		Me.RowLabel.Spring = true
 		Me.RowLabel.Text = "Row: 0"
-		'
-		'SelectLabel
-		'
-		Me.SelectLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
-		Me.SelectLabel.Name = "SelectLabel"
-		Me.SelectLabel.Size = New System.Drawing.Size(384, 21)
-		Me.SelectLabel.Spring = true
-		Me.SelectLabel.Text = "Selection length: 0"
 		'
 		'SaveCode
 		'
@@ -129,7 +102,7 @@ Partial Class CodeEdit
 		Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
 		Me.Label1.Font = New System.Drawing.Font("微软雅黑", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
 		Me.Label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-		Me.Label1.Location = New System.Drawing.Point(727, 12)
+		Me.Label1.Location = New System.Drawing.Point(708, 12)
 		Me.Label1.Name = "Label1"
 		Me.Label1.Size = New System.Drawing.Size(134, 20)
 		Me.Label1.TabIndex = 5
@@ -143,9 +116,9 @@ Partial Class CodeEdit
 		Me.ListBox1.FormattingEnabled = true
 		Me.ListBox1.IntegralHeight = false
 		Me.ListBox1.ItemHeight = 17
-		Me.ListBox1.Location = New System.Drawing.Point(727, 35)
+		Me.ListBox1.Location = New System.Drawing.Point(708, 35)
 		Me.ListBox1.Name = "ListBox1"
-		Me.ListBox1.Size = New System.Drawing.Size(134, 573)
+		Me.ListBox1.Size = New System.Drawing.Size(134, 422)
 		Me.ListBox1.TabIndex = 6
 		Me.ListBox1.TabStop = false
 		'
@@ -153,15 +126,43 @@ Partial Class CodeEdit
 		'
 		Me.ToolTip.AutomaticDelay = 65536
 		'
+		'Editor
+		'
+		Me.Editor.AllText = ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
+		Me.Editor.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+		Me.Editor.Antialiasing = true
+		Me.Editor.AutoTabs = true
+		Me.Editor.BackColor = System.Drawing.Color.White
+		Me.Editor.BlinkCursor = true
+		Me.Editor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.Editor.Colors = CType(resources.GetObject("Editor.Colors"),System.Collections.Generic.List(Of String))
+		Me.Editor.ColorTable = CType(resources.GetObject("Editor.ColorTable"),System.Collections.Generic.List(Of System.Drawing.Color))
+		Me.Editor.Cursor = System.Windows.Forms.Cursors.IBeam
+		Me.Editor.HighlightRules = CType(resources.GetObject("Editor.HighlightRules"),System.Collections.Generic.List(Of System.Collections.Generic.KeyValuePair(Of String, Integer)))
+		Me.Editor.LineNumber = true
+		Me.Editor.LineNumberColor = System.Drawing.Color.DarkCyan
+		Me.Editor.Lines = CType(resources.GetObject("Editor.Lines"),System.Collections.Generic.List(Of String))
+		Me.Editor.Location = New System.Drawing.Point(12, 12)
+		Me.Editor.Name = "Editor"
+		Me.Editor.SelectionAlpha = CType(128,Byte)
+		Me.Editor.SelectionColor = System.Drawing.Color.FromArgb(CType(CType(128,Byte),Integer), CType(CType(135,Byte),Integer), CType(CType(206,Byte),Integer), CType(CType(235,Byte),Integer))
+		Me.Editor.SeperatorColor = System.Drawing.Color.DarkBlue
+		Me.Editor.SeperatorWidth = 2!
+		Me.Editor.Size = New System.Drawing.Size(690, 445)
+		Me.Editor.TabIndex = 7
+		Me.Editor.TextRenderMethod = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit
+		'
 		'CodeEdit
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 12!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(873, 637)
+		Me.ClientSize = New System.Drawing.Size(854, 486)
+		Me.Controls.Add(Me.Editor)
 		Me.Controls.Add(Me.ListBox1)
 		Me.Controls.Add(Me.Label1)
 		Me.Controls.Add(Me.StatusStrip1)
-		Me.Controls.Add(Me.RichTextBox1)
 		Me.MinimumSize = New System.Drawing.Size(300, 180)
 		Me.Name = "CodeEdit"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds
@@ -176,11 +177,10 @@ End Sub
     Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Friend WithEvents LineLabel As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents RowLabel As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents SelectLabel As System.Windows.Forms.ToolStripStatusLabel
 	Friend WithEvents Label1 As Label
 	Friend WithEvents ListBox1 As ListBox
-	Friend WithEvents RichTextBox1 As RichTextBox
 	Friend WithEvents ToolTip As ToolTip
 	Friend WithEvents SaveCode As ToolStripDropDownButton
 	Friend WithEvents RebuildData As ToolStripDropDownButton
+	Friend WithEvents Editor As DevelopControls.SEditor
 End Class

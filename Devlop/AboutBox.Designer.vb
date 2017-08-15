@@ -89,7 +89,7 @@ Partial Class AboutBox
 		Me.LabelVersion.Name = "LabelVersion"
 		Me.LabelVersion.Size = New System.Drawing.Size(314, 214)
 		Me.LabelVersion.TabIndex = 0
-		Me.LabelVersion.Text = "Build 4"
+		Me.LabelVersion.Text = "Build 1.8b"
 		Me.LabelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'OKButton
