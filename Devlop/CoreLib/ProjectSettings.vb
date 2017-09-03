@@ -1,14 +1,19 @@
-﻿Imports Develop.Core
+﻿' ProjectSettings.vb
+' This file contains:
+'
+' Class Develop.ProjectSettings
 
+Imports Develop.Core
+
+''' <summary>
+''' Form to edit project settings.
+''' </summary>
 Public Class ProjectSettings
-    Dim _m As Manager
+    Dim _manager As Manager
 
     Public Sub New(man As Manager)
-        
         ' 此调用是设计器所必需的。
         InitializeComponent()
-        
-        ' 在 InitializeComponent() 调用之后添加任何初始化。
         
         ListView1.Clear
         For Each ref In man.References
@@ -20,8 +25,7 @@ Public Class ProjectSettings
             ListView2.Items.Add(ref)
         Next
 
-        _m = man
-
+        _manager = man
     End Sub
 
     Private Sub Button1_Click( sender As Object,  e As EventArgs) Handles Button1.Click
@@ -45,21 +49,24 @@ Public Class ProjectSettings
 	End Sub
 
 	Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-		_m.References.Clear
+		_manager.References.Clear
         For Each item As ListViewItem In ListView1.Items
-            _m.References.Add(item.Text)
+            _manager.References.Add(item.Text)
         Next
 
-		_m.ImportStatments.Clear
+		_manager.ImportStatments.Clear
         For Each item As ListViewItem In ListView2.Items
-            _m.ImportStatments.Add(item.Text)
+            _manager.ImportStatments.Add(item.Text)
         Next
 
-		Me.Close()
+		Close()
 	End Sub
 
 	Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-		Me.Close()
+		Close()
 	End Sub
-	
+
+	Private Sub ProjectSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+	End Sub
 End Class

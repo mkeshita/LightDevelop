@@ -1,32 +1,39 @@
-﻿Namespace Core
+﻿' XmlLoader.vb
+' This file contains:
+'
+' Class Develop.Core.XmlLoader
+
+Namespace Core
+	''' <summary>
+	''' Reads a Xml project file to the manager.
+	''' </summary>
 	Public Class XmlLoader
-		Private _m As Manager
-		Private _ctrl As New ControlCreater
+		Private _manager As Manager
 
 		Sub New(m As Manager)
-			_m = m
+			_manager = m
 		End Sub
 
 		Sub LoadXml(file As String)
-			If _m.DictControlSizer.Count > 0 Then
-				If MessageBox.Show("All applied changes will lost. ", "Do you really want to load? ",
+			If _manager.SizerCtrlDictionary.Count > 0 Then
+				If MessageBox.Show("Do you really want to Overwrite? ", "Warning", 
 								MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.No Then Exit Sub
 			End If
-			Dim co As New Dictionary(Of Control, Control)(_m.DictControlSizer)
+			Dim co As New Dictionary(Of Control, Control)(_manager.SizerCtrlDictionary)
 			
 			Try
 				Dim x = Xml.XmlReader.Create(file)
 				x.ReadToFollowing("formAttr")
-				_m.DesignerForm.Text = x.GetAttribute("name")
-				ReadControlDecl(x, _m.DesignerForm)
+				_manager.DesignerForm.Text = x.GetAttribute("name")
+				ReadControlDecl(x, _manager.DesignerForm)
 
 				Do While x.ReadToNextSibling("controlAttr")
 					Dim name = x.GetAttribute("name"),
 						type = x.GetAttribute("controlKind")
 
-					Dim c = _ctrl.CreatControlToContainer(type, _m.DesignerForm)
-					_m.AddControl(c)
-					_m.DictControlName(c) = name
+					Dim c = ControlCreater.CreatControlToContainer(type, _manager.DesignerForm)
+					_manager.AddControl(c)
+					_manager.CtrlNameDictionary(c) = name
 
 					ReadControlDecl(x, c)
 				Loop
@@ -43,17 +50,20 @@
 					imp.Add(x.ReadString())
 				Loop While x.ReadToNextSibling("importItem")
 
+				'If x.ReadToFollowing("userCode") Then _
+				'	_manager.UserCode = x.ReadString()
+
 				x.Close()
 
-				_m.References = ref
-				_m.ImportStatments = imp
+				_manager.References = ref
+				_manager.ImportStatments = imp
 			Catch ex As Exception
-				MessageBox.Show("Bad form file format! ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+				MessageBox.Show("Bad project file format! ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 				Exit Sub
 			End Try
 
 			For Each c In co
-				_m.RemoveControl(c.Key)
+				_manager.RemoveControl(c.Key)
 			Next
 		End Sub
 
@@ -80,6 +90,9 @@
 						Dim r = x.GetAttribute("r"), g = x.GetAttribute("g"),
 						b = x.GetAttribute("b"), a = x.GetAttribute("a")
 						val = Color.FromArgb(a, r, g, b)
+					Case "enum"
+						Dim str As String = x.ReadString()
+						val = [Enum].Parse(p.PropertyType, str)
 					Case Else
 						Continue Do
 				End Select

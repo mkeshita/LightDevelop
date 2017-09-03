@@ -36,7 +36,7 @@ Partial Class DialogError
 		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50!))
 		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50!))
 		Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 0, 0)
-		Me.TableLayoutPanel1.Location = New System.Drawing.Point(380, 255)
+		Me.TableLayoutPanel1.Location = New System.Drawing.Point(385, 263)
 		Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 		Me.TableLayoutPanel1.RowCount = 1
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
@@ -65,7 +65,7 @@ Partial Class DialogError
 		Me.ListBox1.ItemHeight = 20
 		Me.ListBox1.Location = New System.Drawing.Point(12, 29)
 		Me.ListBox1.Name = "ListBox1"
-		Me.ListBox1.Size = New System.Drawing.Size(443, 220)
+		Me.ListBox1.Size = New System.Drawing.Size(448, 228)
 		Me.ListBox1.TabIndex = 1
 		'
 		'Label1
@@ -83,7 +83,7 @@ Partial Class DialogError
 		Me.AcceptButton = Me.OK_Button
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 12!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(467, 310)
+		Me.ClientSize = New System.Drawing.Size(472, 318)
 		Me.Controls.Add(Me.Label1)
 		Me.Controls.Add(Me.ListBox1)
 		Me.Controls.Add(Me.TableLayoutPanel1)

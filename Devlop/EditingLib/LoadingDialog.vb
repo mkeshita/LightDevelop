@@ -1,9 +1,13 @@
-﻿Imports System.Windows.Forms
+﻿' LoadingDialog.vb
+' This file contains:
+'
+' Class Develop.Editing.LoadingDialog
+
 Namespace Editing
+	''' <summary>
+	''' Form to display loading status.
+	''' </summary>
 	Public Class LoadingDialog
-		Private Sub LoadingDialog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-		End Sub
 	End Class
-
 End Namespace

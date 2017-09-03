@@ -1,4 +1,12 @@
-﻿Namespace Core
+﻿' SizeSup.vb
+' This file contains:
+'
+' Class Develop.Core.CodeGenerator
+
+Namespace Core
+	''' <summary>
+	''' Class to enable sizing of controls.
+	''' </summary>
 	Public Class SizeSupporter
 		WithEvents _ctrl, _sizer As Control
 		Dim _enabled As Boolean, _ds As DragSupporter, ox, oy As Integer
@@ -7,7 +15,8 @@
 			_ctrl = ctrlMain
 			_sizer = ctrlSizer
 			_enabled = ena
-
+			
+			' sizer also need to support dragging.......
 			_ds = New DragSupporter(_sizer)
 		End Sub
 

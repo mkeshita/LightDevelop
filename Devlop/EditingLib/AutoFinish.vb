@@ -1,25 +1,44 @@
-﻿Imports System.Text.RegularExpressions
-Imports DevelopControls
-Namespace Editing
-	Public Class AutoFinish
+﻿' AutoFinish.vb
+' This file contains:
+'
+' Class Develop.Editing.AutoFinish
 
+Imports System.Text.RegularExpressions
+Imports DevelopControls
+
+Namespace Editing
+	''' <summary>
+	''' Class to enable simple Auto-Finishing for SEditor
+	''' </summary>
+	Public Class AutoFinish
 		Public Images As ImageList
 		Public TextFont As Font = Control.DefaultFont
 		Public WithEvents Editor As SEditor
-		Private cuebox As ListView = Nothing, textcue As Label = Nothing
-		Private reslover As New TypeResolver()
+
+		Private _autobox As ListView = Nothing
+		Private _boxLabel As Label = Nothing
+		Private _reslover As New TypeResolver()
+
+		Private sepr As Char() = {"+", "-", "*", "/", " ", "(", ")", "{", "}", ",", "&", "^", "="}
 
 		Public Sub New(box As SEditor, image As ImageList, imp As String())
 			Editor = box
 			If image Is Nothing Then Throw New ArgumentNullException()
 			Images = image
 
-			reslover.ImportedPrefix = imp
-			reslover.LoadAssembly(GetType(Int32))           ' System.Core
-			reslover.LoadAssembly(GetType(Collection))      ' Microsoft.VisualBasic
-			reslover.LoadAssembly(GetType(Pen))             ' System.Drawing
-			reslover.LoadAssembly(GetType(Form))            ' System.Windows.Forms
-			reslover.BuildList()
+			_reslover.ImportedPrefix = imp
+			_reslover.LoadAssembly(GetType(Int32))           ' System.Core
+			_reslover.LoadAssembly(GetType(Collection))      ' Microsoft.VisualBasic
+			_reslover.LoadAssembly(GetType(Pen))             ' System.Drawing
+			_reslover.LoadAssembly(GetType(Form))            ' System.Windows.Forms
+			_reslover.BuildList()
+
+			CreateCueBox()
+			CreateLabel(New Point(0, 0))
+		End Sub
+
+		Public Sub RebuildResolver()
+			_reslover.BuildList()
 		End Sub
 
 		Private Sub Editor_TextChanged(sender As Object, e As EventArgs) Handles Editor.TextChanged
@@ -36,28 +55,23 @@ Namespace Editing
 				'End If
 
 				' if it's already here then delete it
-				If cuebox IsNot Nothing Then
-					DeleteBox()
+				If _autobox.Visible Then
+					HideBox()
 					Exit Sub
 				End If
 
-				cuebox = CreateCueBox(Editor.CurrentPixelPosition)
-				textcue = CreateLabel(cuebox.Location)
-				textcue.Left += cuebox.Width + 10
+				ShowCueBox()
+				ShowLabel(_autobox.Location)
+				_boxLabel.Left += _autobox.Width + 10
 
-				AddHandler cuebox.KeyPress, AddressOf ListBox_KeyPress
-				AddHandler cuebox.DoubleClick, AddressOf ListBox_DoubleClick
-				AddHandler cuebox.LostFocus, AddressOf ListBox_LostFocus
-				AddHandler cuebox.SelectedIndexChanged,
-												AddressOf ListBox_SelectionChange
-
+				' let's see what's under the cursor
 				Dim name As String = GetName()
-				Dim member As TypeResolver.SpaceMember = reslover.ResolveType(name)
+				Dim member As TypeResolver.SpaceMember = _reslover.ResolveType(name)
 				If member IsNot Nothing Then
 					' this is a class! add all class member into this box
 					For Each mem In member.Type.GetMembers()
 						' if it's a duplicate then skip
-						If cuebox.Items.ContainsKey(mem.Name) Then Continue For
+						If _autobox.Items.ContainsKey(mem.Name) Then Continue For
 
 						' icons switch
 						Dim num As Integer = -1
@@ -80,27 +94,27 @@ Namespace Editing
 						End Select
 
 						If num >= 0 Then
-							Dim i = cuebox.Items.Add(mem.Name, num)
+							Dim i = _autobox.Items.Add(mem.Name, num)
 							i.Name = mem.Name
 							' set the tag to get info in selectionChange()
 							i.Tag = member.Type
 						Else
 							' unexpected member type
-							Dim i = cuebox.Items.Add(mem.Name)
+							Dim i = _autobox.Items.Add(mem.Name)
 							i.Name = mem.Name
 						End If
 					Next
 
 					' show it
-					cuebox.Show()
-					cuebox.Focus()
+					_autobox.Show()
+					_autobox.Focus()
 				Else
 					' ...is it a namespace name?
-					Dim types As List(Of TypeResolver.SpaceMember) = reslover.ResolveNamespace(name)
+					Dim types As List(Of TypeResolver.SpaceMember) = _reslover.ResolveNamespace(name)
 
 					If types Is Nothing Then
 						' if not, everything is over
-						DeleteBox()
+						HideBox()
 						Exit Sub
 					End If
 
@@ -117,29 +131,26 @@ Namespace Editing
 							Case Else
 								iconIndex = 0
 						End Select
-						cuebox.Items.Add(t.Name, iconIndex).Tag = t.Type
+						_autobox.Items.Add(t.Name, iconIndex).Tag = t.Type
 					Next
 
 					' show it
-					cuebox.Show()
-					cuebox.Focus()
+					_autobox.Show()
+					_autobox.Focus()
 				End If
 			Else
-				If cuebox IsNot Nothing Then DeleteBox()
+				If _autobox.Visible Then HideBox()
 			End If
-
 		End Sub
-
-		'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 		Private Sub ListBox_KeyPress(sender As Object, e As KeyPressEventArgs)
 			Dim lb = CType(sender, ListView)
 			If e.KeyChar = " " Then
 				If lb.SelectedItems.Count = 0 Then Exit Sub
 				Editor.InsertSLStringAtCurrent(lb.SelectedItems(0).Text)
-				DeleteBox()
+				HideBox()
 			ElseIf e.KeyChar = vbBack Then
-				DeleteBox()
+				HideBox()
 			End If
 		End Sub
 
@@ -147,15 +158,15 @@ Namespace Editing
 			Dim lb = CType(sender, ListView)
 			If lb.SelectedItems.Count = 0 Then Exit Sub
 			Editor.InsertSLStringAtCurrent(lb.SelectedItems(0).Text)
-			DeleteBox()
+			HideBox()
 		End Sub
 
 		Private Sub ListBox_LostFocus(sender As Object, e As EventArgs)
-			DeleteBox()
+			HideBox()
 		End Sub
 
 		Private Sub ListBox_SelectionChange(sender As Object, e As EventArgs)
-			Dim lb = cuebox
+			Dim lb = _autobox
 			If lb.SelectedItems.Count = 0 Then Exit Sub
 
 			Dim it = lb.SelectedItems(0)
@@ -164,24 +175,24 @@ Namespace Editing
 				Select Case it.ImageIndex
 					Case 0
 						' class
-						textcue.Text = "Class " & it.Text
+						_boxLabel.Text = "Class " & it.Text
 						Exit Sub
 					Case 6
 						' enum
-						textcue.Text = "Enum " & it.Text
+						_boxLabel.Text = "Enum " & it.Text
 						Exit Sub
 					Case 7
 						' interface
-						textcue.Text = "Interface " & it.Text
+						_boxLabel.Text = "Interface " & it.Text
 						Exit Sub
 					Case 4
 						' property
-						textcue.Text = "Property " & it.Text & " As " & t.GetProperty(it.Text).PropertyType.Name
+						_boxLabel.Text = "Property " & it.Text & " As " & t.GetProperty(it.Text).PropertyType.Name
 					Case 2
 						' field
 						Dim f = t.GetField(it.Text)
-						textcue.Text = it.Text & " As " & f.FieldType.Name
-						If f.IsStatic Then textcue.Text &= " = " & f.GetValue(Nothing).ToString()
+						_boxLabel.Text = it.Text & " As " & f.FieldType.Name
+						If f.IsStatic Then _boxLabel.Text &= " = " & f.GetValue(Nothing).ToString()
 						Exit Sub
 					Case 3
 						' method(!)
@@ -207,25 +218,28 @@ Namespace Editing
 
 							str &= mstr & vbCrLf
 						Next
-						textcue.Text = str
+						_boxLabel.Text = str
 						Exit Sub
 				End Select
 			Catch ex As Exception
-				textcue.Text = ""
+				_boxLabel.Text = ""
 			End Try
 		End Sub
 
-		'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+		Private Sub HideBox()
+			_boxLabel.Hide()
+			_autobox.Hide()
 
-		Private Sub DeleteBox()
-			If textcue IsNot Nothing Then textcue.Dispose()
-			textcue = Nothing
-
-			If cuebox IsNot Nothing Then cuebox.Dispose()
-			cuebox = Nothing
+			' note this, for not being 'disabled'
+			Editor.Focus()
 		End Sub
 
-		Private Function CreateCueBox(loca As Point) As ListView
+		Private Sub ShowCueBox()
+			_autobox.Location = Editor.CurrentPixelPosition
+			_autobox.Show()
+		End Sub 
+
+		Private Sub CreateCueBox()
 			Dim cue As New ListView()
 			cue.Name = "keywdCue"
 			cue.SmallImageList = Images
@@ -238,11 +252,22 @@ Namespace Editing
 			cue.Left += 10
 			cue.Top += 20
 			Editor.Controls.Add(cue)
+			cue.Hide()
+			_autobox = cue
+			
+			AddHandler _autobox.KeyPress, AddressOf ListBox_KeyPress
+			AddHandler _autobox.DoubleClick, AddressOf ListBox_DoubleClick
+			AddHandler _autobox.LostFocus, AddressOf ListBox_LostFocus
+			AddHandler _autobox.SelectedIndexChanged,
+											AddressOf ListBox_SelectionChange
+		End Sub
 
-			Return cue
-		End Function
+		Private Sub ShowLabel(loca As Point)
+			_boxLabel.Font = TextFont
+			_boxLabel.Show()
+		End Sub
 
-		Private Function CreateLabel(loca As Point) As Label
+		Private Sub CreateLabel(loca As Point)
 			Dim text As New Label()
 
 			Editor.Controls.Add(text)
@@ -254,11 +279,10 @@ Namespace Editing
 			text.AutoSize = True
 			text.MaximumSize = New Size(Editor.Width - text.Left,
 										Editor.Height - text.Height)
+			text.Hide()
 
-			Return text
-		End Function
-
-		Private sepr As Char() = {"+", "-", "*", "/", " ", "(", ")", "{", "}", ",", "&", "^", "="}
+			_boxLabel = text
+		End Sub
 
 		Private Function GetName() As String
 			Dim line As String
@@ -274,7 +298,7 @@ Namespace Editing
 			Return line
 		End Function
 
-		Public Function GetLastWord(s As String, i As Integer) As String
+		Private Function GetLastWord(s As String, i As Integer) As String
 			' Get the last word.
 			Dim x = Left(s, i)
 			x = Regex.Match(x, "\s*[a-zA-Z]+\s*", RegexOptions.RightToLeft).Value

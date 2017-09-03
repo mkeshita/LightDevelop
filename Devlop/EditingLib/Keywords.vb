@@ -1,4 +1,12 @@
-﻿Namespace Editing
+﻿' Keywords.vb
+' This file contains:
+'
+' Class Develop.Editing.Keywords
+
+Namespace Editing
+	''' <summary>
+	''' Static class containing the highlighting rules.
+	''' </summary>
 	Public Class Keywords
 		' fifth
 		Public Shared Strings As String =
@@ -14,17 +22,12 @@
 				"Interface|Enum|Shared|Overrides|Overloads|Structure|Let|Const|Dim|As|" & _ 
 				"Private|Public|New|Static|Option|Private|Module|IsArray|IsDate|" & _ 
 				"IsEmpty|IsError|IsMissing|IsNull|IsNumeric|IsObject|TypeName|VarType|" & _
-				"Me|Option|Explicit|Eqv|Imp|Clear|Error|Raise|Error|Err|CVErr|On|Error|" & _ 
-				"Resume|IsError|Collection|Add|Remove|Item|Do|Loop|For|Next|For|Each|" & _ 
+				"Me|Option|Explicit|Do|Loop|For|Next|For|Each|" & _ 
 				"Next|While|With|If|Then|Else|Select|Case|Switch|Call|Function|Property|" & _ 
-				"Get|Let|Sub|Date|Now|Time|Timer|CBool|CByte|CDate|CDbl|CDec|CInt|CLng|" & _
-				"CSng|CStr|CObj|Int|Boolean|Byte|Currency|Date|Double|Integer|Long|" & _ 
+				"Get|Let|Sub|CBool|CByte|CDate|CDbl|CDec|CInt|CLng|" & _
+				"CSng|CStr|CObj|Int|Boolean|Byte|Double|Integer|Long|" & _ 
 				"Object|Single|String|Object|Randomize|Rnd|Int|IsArray|Array|Option|" & _ 
-				"Base|Dim|Private|Public|ReDim|Static|LBound|UBound|Erase|ReDim|Chr|" & _ 
-				"Format|Hex|Oct|Format|Str|Fix|Int|Day|Month|Weekday|Year|Hour|Minute|" & _ 
-				"Second|Asc|Val|TimeSerial|TimeValue|StrComp|StrConv|Format|LCase|UCase|" & _ 
-				"Space|String|Len|Format|LSet|RSet|InStr|Left|LTrim|Mid|Right|RTrim|" & _ 
-				"Trim|Option|Compare|Asc|Chr|AppActivate|Shell|SendKeys|Beep|Command)\b"
+				"Dim|Private|Public|ReDim|String|Option|Compare)\b"
 
 		' second
 		Public Shared Operators As String =

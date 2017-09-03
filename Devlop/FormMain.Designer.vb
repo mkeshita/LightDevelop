@@ -36,17 +36,17 @@ Partial Class FormMain
 		Me.PropertyGrid = New System.Windows.Forms.PropertyGrid()
 		Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
 		Me.ToolOpen = New System.Windows.Forms.ToolStripButton()
+		Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+		Me.ToolStripSave = New System.Windows.Forms.ToolStripButton()
+		Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
 		Me.ToolCode = New System.Windows.Forms.ToolStripButton()
+		Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
 		Me.ToolBuild = New System.Windows.Forms.ToolStripButton()
+		Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
 		Me.ToolTest = New System.Windows.Forms.ToolStripButton()
 		Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
 		Me.SaveDialog = New System.Windows.Forms.SaveFileDialog()
 		Me.OpenDialog = New System.Windows.Forms.OpenFileDialog()
-		Me.ToolStripSave = New System.Windows.Forms.ToolStripButton()
-		Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-		Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-		Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-		Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
 		Me.StatusStrip.SuspendLayout
 		Me.PanelRight.SuspendLayout
 		Me.PanelLeft.SuspendLayout
@@ -132,11 +132,12 @@ Partial Class FormMain
 		'
 		'ToolStrip1
 		'
-		Me.ToolStrip1.BackColor = System.Drawing.Color.WhiteSmoke
+		Me.ToolStrip1.BackColor = System.Drawing.Color.DimGray
 		resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
 		Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 		Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolOpen, Me.ToolStripSeparator1, Me.ToolStripSave, Me.ToolStripSeparator2, Me.ToolCode, Me.ToolStripSeparator3, Me.ToolBuild, Me.ToolStripSeparator4, Me.ToolTest})
+		Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
 		Me.ToolStrip1.Name = "ToolStrip1"
 		Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
 		Me.ToolStrip1.Stretch = true
@@ -146,16 +147,41 @@ Partial Class FormMain
 		resources.ApplyResources(Me.ToolOpen, "ToolOpen")
 		Me.ToolOpen.Name = "ToolOpen"
 		'
+		'ToolStripSeparator1
+		'
+		Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+		resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
+		'
+		'ToolStripSave
+		'
+		resources.ApplyResources(Me.ToolStripSave, "ToolStripSave")
+		Me.ToolStripSave.Name = "ToolStripSave"
+		'
+		'ToolStripSeparator2
+		'
+		Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+		resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
+		'
 		'ToolCode
 		'
 		Me.ToolCode.CheckOnClick = true
 		resources.ApplyResources(Me.ToolCode, "ToolCode")
 		Me.ToolCode.Name = "ToolCode"
 		'
+		'ToolStripSeparator3
+		'
+		Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+		resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
+		'
 		'ToolBuild
 		'
 		resources.ApplyResources(Me.ToolBuild, "ToolBuild")
 		Me.ToolBuild.Name = "ToolBuild"
+		'
+		'ToolStripSeparator4
+		'
+		Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+		resources.ApplyResources(Me.ToolStripSeparator4, "ToolStripSeparator4")
 		'
 		'ToolTest
 		'
@@ -170,31 +196,6 @@ Partial Class FormMain
 		'OpenDialog
 		'
 		Me.OpenDialog.FileName = "OpenFileDialog1"
-		'
-		'ToolStripSave
-		'
-		resources.ApplyResources(Me.ToolStripSave, "ToolStripSave")
-		Me.ToolStripSave.Name = "ToolStripSave"
-		'
-		'ToolStripSeparator1
-		'
-		Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-		resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
-		'
-		'ToolStripSeparator2
-		'
-		Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-		resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
-		'
-		'ToolStripSeparator3
-		'
-		Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-		resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
-		'
-		'ToolStripSeparator4
-		'
-		Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-		resources.ApplyResources(Me.ToolStripSeparator4, "ToolStripSeparator4")
 		'
 		'FormMain
 		'

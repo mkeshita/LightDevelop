@@ -1,33 +1,61 @@
-﻿Namespace Core
+﻿' Manager.vb
+' This file contains:
+'
+' Class Develop.Core.Manager
+
+Namespace Core
+	''' <summary>
+	''' The main manager of designer interface.
+	''' </summary>
 	Public Class Manager
-		Dim ctrlCount As Integer = 0
+		Private ctrlCount As Integer = 0
 
-		Friend DictControlSizer As Dictionary(Of Control, Control)   'This is the Main-control to Sizer dict.
-		Friend DictControlDragClass As Dictionary(Of Control, DragSupporter)   'This is the Main-control to Drag-Support class dict.
-		Friend DictControlSizeClass As Dictionary(Of Control, SizeSupporter)   'This is the Main-control to Size-Support class dict.
-		Friend DictControlName As Dictionary(Of Control, String)    'This is the dict. of Main-control to its Name
+		Public SizerCtrlDictionary	As Dictionary(Of Control, Control)
+		Public DragSupDictionary	As Dictionary(Of Control, DragSupporter)
+		Public SizeSupDictionary	As Dictionary(Of Control, SizeSupporter)
+		Public CtrlNameDictionary	As Dictionary(Of Control, String)
 
-		Friend DesignerForm As Form
-		Friend UserCode As String
-		Friend References As New Collections.Specialized.StringCollection
-		Friend ImportStatments As New List(Of String)
+		Public DesignerForm As Form
+		Public UserCode As String
+		Public References As New Specialized.StringCollection
+		Public ImportStatments As New List(Of String)
 
-		Dim _prop As PropertyGrid
-		Dim _active As Control
-		Dim WithEvents _txtnam As TextBox
+		Public Property DragEnable(c As Control) As Boolean
+			Get
+				If Not DragSupDictionary.ContainsKey(c) Then Throw New KeyNotFoundException
+				Return DragSupDictionary(c).Enabled
+			End Get
+			Set(ByVal value As Boolean)
+				DragSupDictionary(c).Enabled = value
+			End Set
+		End Property
+
+		Public Property SizeEnable(c As Control) As Boolean
+			Get
+				If Not SizeSupDictionary.ContainsKey(c) Then Throw New KeyNotFoundException
+				Return SizeSupDictionary(c).Enabled
+			End Get
+			Set(ByVal value As Boolean)
+				SizeSupDictionary(c).Enabled = value
+			End Set
+		End Property
+
+		Private _propGrid As PropertyGrid
+		Private _focusCtrl As Control
+		Private WithEvents _nameBox As TextBox
 
 		Public Sub New(F As Form, Prop As PropertyGrid, Txt As TextBox)
 			DesignerForm = F
-			_prop = Prop
-			_txtnam = Txt
+			_propGrid = Prop
+			_nameBox = Txt
 
-			DictControlSizer = New Dictionary(Of Control, Control)
-			DictControlDragClass = New Dictionary(Of Control, DragSupporter)
-			DictControlSizeClass = New Dictionary(Of Control, SizeSupporter)
-			DictControlName = New Dictionary(Of Control, String)
+			SizerCtrlDictionary = New Dictionary(Of Control, Control)
+			DragSupDictionary = New Dictionary(Of Control, DragSupporter)
+			SizeSupDictionary = New Dictionary(Of Control, SizeSupporter)
+			CtrlNameDictionary = New Dictionary(Of Control, String)
 
 			AddHandler DesignerForm.Click, AddressOf ctrl_Click
-			DictControlName.Add(DesignerForm, "Blank")
+			CtrlNameDictionary.Add(DesignerForm, "Blank")
 
 			UserCode = String.Format("Partial Class " & F.Name & "{0}" &
 									 "    {0}" &
@@ -64,10 +92,10 @@
 			AddHandler c.MouseUp, AddressOf ctrl_Click
 
 			DesignerForm.Controls.Add(sizer)
-			DictControlSizer.Add(c, sizer)
-			DictControlDragClass.Add(c, ds)
-			DictControlSizeClass.Add(c, ss)
-			DictControlName.Add(c, "Control" & ctrlCount.ToString)
+			SizerCtrlDictionary.Add(c, sizer)
+			DragSupDictionary.Add(c, ds)
+			SizeSupDictionary.Add(c, ss)
+			CtrlNameDictionary.Add(c, "Control" & ctrlCount.ToString)
 
 			ctrlCount += 1
 		End Sub
@@ -75,12 +103,12 @@
 		Public Function RemoveControl(c As Control) As Boolean
 			Try
 				DesignerForm.Controls.Remove(c)
-				DesignerForm.Controls.Remove(DictControlSizer(c))
+				DesignerForm.Controls.Remove(SizerCtrlDictionary(c))
 
-				DictControlSizer.Remove(c)
-				DictControlDragClass.Remove(c)
-				DictControlSizeClass.Remove(c)
-				DictControlName.Remove(c)
+				SizerCtrlDictionary.Remove(c)
+				DragSupDictionary.Remove(c)
+				SizeSupDictionary.Remove(c)
+				CtrlNameDictionary.Remove(c)
 			Catch ex As Exception
 				Return False
 			End Try
@@ -89,37 +117,17 @@
 
 		Private Sub ctrl_Click(sender As Object, e As MouseEventArgs)
 			If e.Button = MouseButtons.Left Then
-				_prop.SelectedObject = sender
-				_active = sender
-				_txtnam.Text = DictControlName(sender)
+				_propGrid.SelectedObject = sender
+				_focusCtrl = sender
+				_nameBox.Text = CtrlNameDictionary(sender)
 			ElseIf e.Button = MouseButtons.Right Then
 				If Not RemoveControl(sender) Then MsgBox("Error in removing control")
 			End If
 		End Sub
 
-		Public Property DragEnable(c As Control) As Boolean
-			Get
-				If Not DictControlDragClass.ContainsKey(c) Then Throw New KeyNotFoundException
-				Return DictControlDragClass(c).Enabled
-			End Get
-			Set(ByVal value As Boolean)
-				DictControlDragClass(c).Enabled = value
-			End Set
-		End Property
-
-		Public Property SizeEnable(c As Control) As Boolean
-			Get
-				If Not DictControlSizeClass.ContainsKey(c) Then Throw New KeyNotFoundException
-				Return DictControlSizeClass(c).Enabled
-			End Get
-			Set(ByVal value As Boolean)
-				DictControlSizeClass(c).Enabled = value
-			End Set
-		End Property
-
-		Private Sub _txtnam_TextChanged(sender As Object, e As EventArgs) Handles _txtnam.TextChanged
-			If _active Is Nothing Then Exit Sub
-			DictControlName(_active) = _txtnam.Text
+		Private Sub _txtnam_TextChanged(sender As Object, e As EventArgs) Handles _nameBox.TextChanged
+			If _focusCtrl Is Nothing Then Exit Sub
+			CtrlNameDictionary(_focusCtrl) = _nameBox.Text
 		End Sub
 	End Class
 End Namespace

@@ -1,6 +1,18 @@
-﻿Imports System.Reflection
+﻿' TypeResolver.vb
+' This file contains:
+'
+' Class Develop.Editing.TypeResolver
+' |
+' |== Class TypeResolver.SpaceMember
+' |
+' \== Enum TypeResolver.ElementKind
+
+Imports System.Reflection
 
 Namespace Editing
+	''' <summary>
+	''' Class to identify a name to a type.
+	''' </summary>
 	Public Class TypeResolver
 		Public ImportedPrefix As String()
 		Public LoadedAssembly As New List(Of Assembly)

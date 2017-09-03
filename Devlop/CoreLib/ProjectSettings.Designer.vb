@@ -230,7 +230,7 @@ Partial Class ProjectSettings
 		Me.Button5.Text = "Cancel"
 		Me.Button5.UseVisualStyleBackColor = true
 		'
-		'ReferencesEdit
+		'ProjectSettings
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 12!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -242,7 +242,7 @@ Partial Class ProjectSettings
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
 		Me.MaximizeBox = false
 		Me.MinimizeBox = false
-		Me.Name = "ReferencesEdit"
+		Me.Name = "ProjectSettings"
 		Me.ShowIcon = false
 		Me.ShowInTaskbar = false
 		Me.Text = "Project Settings"

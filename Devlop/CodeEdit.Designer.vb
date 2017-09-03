@@ -30,8 +30,6 @@ Partial Class CodeEdit
 		Me.RowLabel = New System.Windows.Forms.ToolStripStatusLabel()
 		Me.SaveCode = New System.Windows.Forms.ToolStripDropDownButton()
 		Me.RebuildData = New System.Windows.Forms.ToolStripDropDownButton()
-		Me.Label1 = New System.Windows.Forms.Label()
-		Me.ListBox1 = New System.Windows.Forms.ListBox()
 		Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
 		Me.Editor = New DevelopControls.SEditor()
 		Me.StatusStrip1.SuspendLayout
@@ -96,32 +94,6 @@ Partial Class CodeEdit
 		Me.RebuildData.Size = New System.Drawing.Size(162, 24)
 		Me.RebuildData.Text = "Rebuild Sense Database"
 		'
-		'Label1
-		'
-		Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-		Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.Label1.Font = New System.Drawing.Font("微软雅黑", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
-		Me.Label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-		Me.Label1.Location = New System.Drawing.Point(708, 12)
-		Me.Label1.Name = "Label1"
-		Me.Label1.Size = New System.Drawing.Size(134, 20)
-		Me.Label1.TabIndex = 5
-		Me.Label1.Text = "Code Snippets"
-		'
-		'ListBox1
-		'
-		Me.ListBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-		Me.ListBox1.Font = New System.Drawing.Font("微软雅黑", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134,Byte))
-		Me.ListBox1.FormattingEnabled = true
-		Me.ListBox1.IntegralHeight = false
-		Me.ListBox1.ItemHeight = 17
-		Me.ListBox1.Location = New System.Drawing.Point(708, 35)
-		Me.ListBox1.Name = "ListBox1"
-		Me.ListBox1.Size = New System.Drawing.Size(134, 422)
-		Me.ListBox1.TabIndex = 6
-		Me.ListBox1.TabStop = false
-		'
 		'ToolTip
 		'
 		Me.ToolTip.AutomaticDelay = 65536
@@ -150,7 +122,7 @@ Partial Class CodeEdit
 		Me.Editor.SelectionColor = System.Drawing.Color.FromArgb(CType(CType(128,Byte),Integer), CType(CType(135,Byte),Integer), CType(CType(206,Byte),Integer), CType(CType(235,Byte),Integer))
 		Me.Editor.SeperatorColor = System.Drawing.Color.DarkBlue
 		Me.Editor.SeperatorWidth = 2!
-		Me.Editor.Size = New System.Drawing.Size(690, 445)
+		Me.Editor.Size = New System.Drawing.Size(830, 445)
 		Me.Editor.TabIndex = 7
 		Me.Editor.TextRenderMethod = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit
 		'
@@ -160,8 +132,6 @@ Partial Class CodeEdit
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.ClientSize = New System.Drawing.Size(854, 486)
 		Me.Controls.Add(Me.Editor)
-		Me.Controls.Add(Me.ListBox1)
-		Me.Controls.Add(Me.Label1)
 		Me.Controls.Add(Me.StatusStrip1)
 		Me.MinimumSize = New System.Drawing.Size(300, 180)
 		Me.Name = "CodeEdit"
@@ -177,8 +147,6 @@ End Sub
     Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Friend WithEvents LineLabel As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents RowLabel As System.Windows.Forms.ToolStripStatusLabel
-	Friend WithEvents Label1 As Label
-	Friend WithEvents ListBox1 As ListBox
 	Friend WithEvents ToolTip As ToolTip
 	Friend WithEvents SaveCode As ToolStripDropDownButton
 	Friend WithEvents RebuildData As ToolStripDropDownButton

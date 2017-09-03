@@ -1,7 +1,14 @@
-﻿Public NotInheritable Class AboutBox
+﻿' AboutBox.vb
+' This file contains:
+'
+' Class Develop.AboutBox
 
-	Private Sub OKButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OKButton.Click
-		Me.Close()
+''' <summary>
+''' About dialog of the program.
+''' </summary>
+Public NotInheritable Class AboutBox
+	Private Sub OKButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles OKButton.Click
+		Close()
 	End Sub
 	
 	Sub SetTransp(ctrl As Control())
@@ -16,6 +23,6 @@
 	End Sub
 
 	Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-		Interaction.Shell("cmd /c ""start http://github.com/Knowif/LightDevelop""", AppWinStyle.Hide, False)
+		Shell("cmd /c ""start http://github.com/Knowif/LightDevelop""", AppWinStyle.Hide, False)
 	End Sub
 End Class

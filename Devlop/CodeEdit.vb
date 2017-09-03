@@ -1,13 +1,19 @@
-﻿Imports System.Text.RegularExpressions
+﻿' CodeEdit.vb
+' This file contains:
+'
+' Class Develop.CodeEdit
+
 Imports Develop.Core
 Imports Develop.Editing
 
+''' <summary>
+''' Form of code editing interface.
+''' </summary>
 Public Class CodeEdit
 	Friend Shared opened As Boolean = False
 
 	Dim _manager As Manager
-	Dim autofin As AutoFinish
-	Dim snippets As New Dictionary(Of String, String)
+	Dim _autofinish As AutoFinish
 
 	Public Property MManager() As Manager
 		Get
@@ -26,12 +32,11 @@ Public Class CodeEdit
 
 	Private Sub CodeEdit_Load(sender As Object, e As EventArgs) Handles Me.Load
 		opened = True
-		Me.DoubleBuffered = True
 		Editor.AllText = MManager.UserCode
 		Editor.ColorTable = New List(Of Color)(Keywords.ColorTable)
 		Editor.HighlightRules = 
 				New List(Of KeyValuePair(Of String, Integer))(Keywords.RuleTable)
-		autofin = New AutoFinish(Editor, ImageList1, _manager.ImportStatments.ToArray)
+		_autofinish = New AutoFinish(Editor, ImageList1, _manager.ImportStatments.ToArray)
 	End Sub
 
 	Private Sub RichTextBox1_SelectionChanged(sender As Object, e As EventArgs) Handles Editor.SelectionChanged
@@ -39,4 +44,11 @@ Public Class CodeEdit
 		RowLabel.Text = "Row: " & Editor.CurrentCursor.X
 	End Sub
 
+	Private Sub SaveCode_Click(sender As Object, e As EventArgs) Handles SaveCode.Click
+		_manager.UserCode = Editor.AllText
+	End Sub
+
+	Private Sub RebuildData_Click(sender As Object, e As EventArgs) Handles RebuildData.Click
+		_autofinish.RebuildResolver()
+	End Sub
 End Class

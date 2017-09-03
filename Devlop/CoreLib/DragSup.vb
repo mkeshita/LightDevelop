@@ -1,4 +1,12 @@
-﻿Namespace Core
+﻿' DragSup.vb
+' This file contains:
+'
+' Class Develop.Core.DragSupporter
+
+Namespace Core
+	''' <summary>
+	''' Class to enable dragging of controls.
+	''' </summary>
 	Public Class DragSupporter
 		WithEvents _ctrl As Control
 		Dim _enabled As Boolean, dx, dy As Single
@@ -30,7 +38,5 @@
 				_enabled = value
 			End Set
 		End Property
-
 	End Class
-
 End Namespace

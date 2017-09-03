@@ -126,8 +126,8 @@
     <Compile Include="CodeEdit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CoreLib\AddCtrlHlp.vb" />
-    <Compile Include="CoreLib\CodeRun.vb" />
+    <Compile Include="CoreLib\CtrlCreate.vb" />
+    <Compile Include="CoreLib\CodeCompiler.vb" />
     <Compile Include="CoreLib\DialogError.Designer.vb">
       <DependentUpon>DialogError.vb</DependentUpon>
     </Compile>
@@ -137,15 +137,13 @@
     <Compile Include="CoreLib\DragSup.vb" />
     <Compile Include="CoreLib\XmlLoader.vb" />
     <Compile Include="CoreLib\XmlSaver.vb" />
-    <Compile Include="EditingLib\EditingSupporter.vb" />
     <Compile Include="EditingLib\LoadingDialog.Designer.vb">
       <DependentUpon>LoadingDialog.vb</DependentUpon>
     </Compile>
     <Compile Include="EditingLib\LoadingDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditingLib\RtbAutoFinish.vb" />
-    <Compile Include="EditingLib\RtbCodeSnippet.vb" />
+    <Compile Include="EditingLib\AutoFinish.vb" />
     <Compile Include="EditingLib\TypeResolver.vb" />
     <Compile Include="Extension.vb" />
     <Compile Include="FormMain.vb">
@@ -163,7 +161,7 @@
     <Compile Include="CoreLib\ProjectSettings.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CoreLib\Saver.vb" />
+    <Compile Include="CoreLib\CodeGenerator.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -261,9 +259,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TooltipLib\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DevelopControls\DevelopControls.vbproj">
       <Project>{c2654957-7c39-407c-864c-c7f6e84e60fb}</Project>
