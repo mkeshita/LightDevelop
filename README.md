@@ -1,39 +1,27 @@
-# LightDevelop
-A lightweight IDE for Visual Basic .NET, which 
-**does not depends any third-party libraries** such like:
+![](https://github.com/Knowif/LightDevelop/raw/master/Markdown/post.png)
 
-- [.NET Compiler Platform ("Roslyn")](https://github.com/dotnet/roslyn) or
-- [AvalonEdit](https://github.com/icsharpcode/AvalonEdit)
+# WhatIs(LightDevelop)
 
-...and supports these features:
+A lightweight IDE for Visual Basic .NET, which **does not depends any third-party libraries**, and supports these features:
 
-- Form editing & saving
+- Visual form editing & saving
 - Syntax highlighting
 - Code auto-finishing
-- Code snippets
 
-## Form editing
+## HowTo(Editing.Form)
 
-![](https://github.com/Knowif/LightDevelop/raw/master/Markdown/formedit.png)
-
-- Double click on "Add control panel" to add controls;
-- Right click on controls to delete;
-- Drag control to move;
-- Drag "Size grip" at the corner to resize;
+- **Double click** on right panel to add controls;
+- **Right click** on controls to delete;
+- **Drag control** to move;
+- **Drag** the size grip at the corner to resize;
 - You can edit the property on the grid;
-	- *LightDevelop can only save these types of property:*
-	- *Numbers; Booleans; Strings; Sizes; Points and Colors*
+	- *LightDevelop can only save these types of property for now:*
+	- *Numbers; Booleans; Strings; Sizes; Points; Enum's and Colors*
 - You can save your form to a XML file by File > Save Project.
 	- *Code is not included in saved file.*
 	
-## Code editing
+## HowTo(Editing.Code)
 
-![](https://github.com/Knowif/LightDevelop/raw/master/Markdown/code.png)
-
-- Click "Code" on the tool bar to open code window;
+- Click "CODE" on the tool bar to open or close code window;
 - Double click on snippet panel to insert a code snippet;
-- When typing a dot (".")...
-	- after a namespace like "System.IO" or just "IO", there is namespace member auto-finishing;
-	- after a type like "Point" or "Drawing.Point", there is class member auto-finishing.
-
-**Note:** A much more complex code-editing control is under developing in [this branch](https://github.com/Knowif/LightDevelop/tree/EditControls).
+- When typing a dot ("."), there is auto-finishing box.
